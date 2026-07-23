@@ -1,14 +1,6 @@
-
-import {
-  FileText,
-  Mail,
-  MoveUpRight,
-} from "lucide-react";
-
-import {
-  FaGithub,
-  FaLinkedinIn,
-} from "react-icons/fa6";
+import Reveal from "@/components/animations/Reveal";
+import { FileText, Mail, MoveUpRight } from "lucide-react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 
 const socialLinks = [
   {
@@ -32,85 +24,90 @@ export default function Contact() {
   return (
     <section className="section contact-section" id="contact">
       <div className="container">
-        <p className="section-number">05</p>
+        <Reveal>
+          <p className="section-number">05</p>
+        </Reveal>
 
         <div className="contact-content">
-          <p className="eyebrow">
-            Let&apos;s build something meaningful
-          </p>
+          <Reveal delay={0.08}>
+            <p className="eyebrow">
+              Let&apos;s build something meaningful
+            </p>
+          </Reveal>
 
-          <h2>
-            Have an opportunity, project, or idea?
-            <span> Let&apos;s talk.</span>
-          </h2>
+          <Reveal delay={0.14}>
+            <h2>
+              Have an opportunity, project, or idea?
+              <span> Let&apos;s talk.</span>
+            </h2>
+          </Reveal>
 
-          <p>
-            I am building my professional brand, developing my skills,
-            and connecting with people creating thoughtful digital
-            products.
-          </p>
+          <Reveal delay={0.2}>
+            <p>
+              I am building my professional brand, developing my skills, and
+              connecting with people creating thoughtful digital products.
+            </p>
+          </Reveal>
 
-          <div className="contact-actions">
-            <a
-              className="button button-primary"
-              href="mailto:preciousngehneba@gmail.com"
-            >
-              <Mail size={18} aria-hidden="true" />
-              Send me an email
-            </a>
+          <Reveal delay={0.25}>
+            <div className="contact-actions">
+              <a
+                className="button button-primary"
+                href="mailto:preciousngehneba@gmail.com"
+              >
+                <Mail size={18} aria-hidden="true" />
+                Send me an email
+              </a>
 
-            <a
-              className="button button-secondary"
-              href="mailto:preciousngehneba@gmail.com?subject=Request%20for%20Neba%20Precious%27%20CV"
-            >
-              <FileText size={18} aria-hidden="true" />
-              Request my CV
-            </a>
-          </div>
+              <a
+                className="button button-secondary"
+                href="mailto:preciousngehneba@gmail.com?subject=Request%20for%20Neba%20Precious%27%20CV"
+              >
+                <FileText size={18} aria-hidden="true" />
+                Request my CV
+              </a>
+            </div>
+          </Reveal>
 
-          <div
-            className="social-links"
-            aria-label="Social profiles"
-          >
-            {socialLinks.map((social) => {
+          <div className="social-links" aria-label="Social profiles">
+            {socialLinks.map((social, index) => {
               const Icon = social.icon;
-              const isExternal =
-                social.href.startsWith("http");
+              const isExternal = social.href.startsWith("http");
 
               return (
-                <a
-                  href={social.href}
+                <Reveal
                   key={social.label}
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noreferrer" : undefined}
+                  delay={0.3 + index * 0.08}
                 >
-                  <span className="social-icon">
-                    <Icon
-                      size={19}
+                  <a
+                    href={social.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noreferrer" : undefined}
+                  >
+                    <span className="social-icon">
+                      <Icon size={19} aria-hidden="true" />
+                    </span>
+
+                    <span>{social.label}</span>
+
+                    <MoveUpRight
+                      className="social-arrow"
+                      size={16}
                       aria-hidden="true"
                     />
-                  </span>
-
-                  <span>{social.label}</span>
-
-                  <MoveUpRight
-                    className="social-arrow"
-                    size={16}
-                    aria-hidden="true"
-                  />
-                </a>
+                  </a>
+                </Reveal>
               );
             })}
           </div>
         </div>
 
-        <footer className="footer">
-          <p>
-            © {new Date().getFullYear()} Neba Precious Ngeh
-          </p>
-
-          <p>Designed and built with Next.js</p>
-        </footer>
+        <Reveal delay={0.2}>
+          <footer className="footer">
+            <p>© {new Date().getFullYear()} Neba Precious Ngeh</p>
+            <p>Designed and built with Next.js</p>
+          </footer>
+        </Reveal>
       </div>
     </section>
   );
