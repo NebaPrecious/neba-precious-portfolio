@@ -11,6 +11,7 @@ import Creative from "@/components/sections/Creative";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
+import PersonStructuredData from "@/components/seo/PersonStructuredData";
 
 export default function Home() {
   return (
@@ -27,6 +28,20 @@ export default function Home() {
           <Contact />
         </main>
       </div>
+
+      return (
+  <>
+    <PersonStructuredData />
+
+    <div className="desktop-portfolio">
+      {/* existing content */}
+    </div>
+
+    <div className="mobile-portfolio">
+      {/* existing content */}
+    </div>
+  </>
+);
 
       <div className="mobile-portfolio">
         <Navbar />
