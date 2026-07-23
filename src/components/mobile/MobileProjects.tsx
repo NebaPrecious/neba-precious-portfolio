@@ -1,53 +1,13 @@
 "use client";
 
+import Image from "next/image";
+import JangoraShowcase from "@/components/projects/JangoraShowcase";
 import { motion } from "motion/react";
 import {
   ArrowUpRight,
-  BrainCircuit,
-  HeartPulse,
+  LockKeyhole,
   Sparkles,
 } from "lucide-react";
-
-const mobileProjects = [
-  {
-    number: "01",
-    name: "Jangora",
-    category: "Personal Finance",
-    description:
-      "An AI-assisted personal finance application designed to help users track expenses, build better saving habits, work toward financial goals, and develop financial discipline.",
-    technologies: [
-      "Ionic Angular",
-      "NestJS",
-      "TypeScript",
-      "PostgreSQL",
-    ],
-    status: "In development",
-    icon: BrainCircuit,
-    href: "https://github.com/NebaPrecious",
-    linkLabel: "View GitHub profile",
-    accentClass: "mobile-project-purple",
-    external: true,
-  },
-  {
-    number: "02",
-    name: "PharmaCompare",
-    category: "Digital Healthcare",
-    description:
-      "An online healthcare platform designed to help people access medical services from home and receive faster assistance during urgent situations, with AI-supported features.",
-    technologies: [
-      "Angular",
-      "Ionic",
-      "Node.js",
-      "MySQL",
-    ],
-    status: "Team project",
-    icon: HeartPulse,
-    href: "#mobile-contact",
-    linkLabel: "Discuss the project",
-    accentClass: "mobile-project-cyan",
-    external: false,
-  },
-];
 
 export default function MobileProjects() {
   return (
@@ -58,9 +18,18 @@ export default function MobileProjects() {
       <div className="mobile-container">
         <motion.div
           className="mobile-section-heading"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          initial={{
+            opacity: 0,
+            y: 22,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
           transition={{
             duration: 0.65,
             ease: [0.22, 1, 0.36, 1],
@@ -68,7 +37,10 @@ export default function MobileProjects() {
         >
           <div>
             <span className="mobile-section-number">02</span>
-            <p className="mobile-section-label">Selected projects</p>
+
+            <p className="mobile-section-label">
+              Selected projects
+            </p>
           </div>
 
           <Sparkles size={19} aria-hidden="true" />
@@ -76,9 +48,18 @@ export default function MobileProjects() {
 
         <motion.h2
           className="mobile-section-title"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          initial={{
+            opacity: 0,
+            y: 22,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
           transition={{
             duration: 0.65,
             delay: 0.06,
@@ -90,9 +71,18 @@ export default function MobileProjects() {
 
         <motion.p
           className="mobile-section-intro"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          initial={{
+            opacity: 0,
+            y: 18,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
           transition={{
             duration: 0.6,
             delay: 0.12,
@@ -103,71 +93,154 @@ export default function MobileProjects() {
         </motion.p>
 
         <div className="mobile-project-grid">
-          {mobileProjects.map((project, index) => {
-            const Icon = project.icon;
+          <motion.article
+            className="mobile-featured-project"
+            initial={{
+              opacity: 0,
+              y: 28,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.12,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <JangoraShowcase mobile />
 
-            return (
-              <motion.article
-                className={`mobile-project-card ${project.accentClass}`}
-                key={project.name}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.68,
-                  delay: index * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+            <div className="mobile-project-content">
+              <div className="mobile-project-heading-row">
+                <div>
+                  <span>Personal Finance</span>
+                  <h3>Jangora</h3>
+                </div>
+
+                <span className="mobile-project-status">
+                  In development
+                </span>
+              </div>
+
+              <p>
+                An AI-assisted personal finance application designed to help
+                users track expenses, build better saving habits, work toward
+                financial goals, and develop financial discipline.
+              </p>
+
+              <div
+                className="mobile-project-tags"
+                aria-label="Jangora technologies"
               >
-                <div className="mobile-project-visual">
-                  <div className="mobile-project-orb mobile-project-orb-one" />
-                  <div className="mobile-project-orb mobile-project-orb-two" />
+                <span>Ionic Angular</span>
+                <span>NestJS</span>
+                <span>TypeScript</span>
+                <span>PostgreSQL</span>
+              </div>
 
-                  <div className="mobile-project-visual-top">
-                    <span>{project.number}</span>
+              <a
+                href="https://github.com/NebaPrecious"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>View my GitHub</span>
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </motion.article>
 
-                    <span className="mobile-project-status">
-                      {project.status}
-                    </span>
-                  </div>
+          <motion.article
+            className="mobile-company-project"
+            initial={{
+              opacity: 0,
+              y: 28,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.12,
+            }}
+            transition={{
+              duration: 0.7,
+              delay: 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <div className="mobile-company-project-visual">
+              <div className="mobile-company-preview">
+                <Image
+                  src="/projects/pharmacompare/pharmacompare-splash.png"
+                  alt="Approved PharmaCompare splash screen preview"
+                  fill
+                  sizes="(max-width: 700px) 72vw"
+                  className="mobile-company-preview-image"
+                />
 
-                  <div className="mobile-project-icon">
-                    <Icon
-                      size={34}
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                    />
-                  </div>
+                <div className="mobile-company-preview-overlay">
+                  <span>Limited public preview</span>
+                  <strong>PharmaCompare</strong>
+                </div>
+              </div>
 
-                  <p>{project.category}</p>
+              <span className="mobile-company-security">
+                <LockKeyhole size={13} aria-hidden="true" />
+                Company-owned project
+              </span>
+            </div>
+
+            <div className="mobile-project-content">
+              <div className="mobile-project-heading-row">
+                <div>
+                  <span>Digital Healthcare</span>
+                  <h3>PharmaCompare</h3>
                 </div>
 
-                <div className="mobile-project-content">
-                  <h3>{project.name}</h3>
+                <span className="mobile-project-status">
+                  Team project
+                </span>
+              </div>
 
-                  <p>{project.description}</p>
+              <p>
+                Contributed as part of a team to the frontend and backend
+                development of a company-owned healthcare platform helping
+                users access medical services from home and receive faster
+                support during urgent situations.
+              </p>
 
-                  <div
-                    className="mobile-project-tags"
-                    aria-label={`${project.name} technologies`}
-                  >
-                    {project.technologies.map((technology) => (
-                      <span key={technology}>{technology}</span>
-                    ))}
-                  </div>
+              <div className="mobile-confidential-note">
+                <LockKeyhole size={14} aria-hidden="true" />
 
-                  <a
-                    href={project.href}
-                    target={project.external ? "_blank" : undefined}
-                    rel={project.external ? "noreferrer" : undefined}
-                  >
-                    <span>{project.linkLabel}</span>
-                    <ArrowUpRight size={17} aria-hidden="true" />
-                  </a>
-                </div>
-              </motion.article>
-            );
-          })}
+                <span>
+                  Only an approved splash-screen preview is displayed. The
+                  repository, internal interfaces, and full product details
+                  remain private because the platform belongs to the company
+                  and is still under development.
+                </span>
+              </div>
+
+              <div
+                className="mobile-project-tags"
+                aria-label="PharmaCompare technologies"
+              >
+                <span>Angular</span>
+                <span>Ionic</span>
+                <span>Node.js</span>
+                <span>MySQL</span>
+              </div>
+
+              <a href="#mobile-contact">
+                <span>Details available on request</span>
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </motion.article>
         </div>
       </div>
     </section>

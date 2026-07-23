@@ -3,6 +3,7 @@
 import {
   useEffect,
   useState,
+  useSyncExternalStore,
 } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -52,17 +53,22 @@ const navigationLinks = [
   },
 ];
 
+function subscribeToClientState() {
+  return () => {};
+}
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+
+  const isMounted = useSyncExternalStore(
+    subscribeToClientState,
+    () => true,
+    () => false,
+  );
 
   function closeMenu() {
     setIsMenuOpen(false);
   }
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -105,9 +111,15 @@ export default function Navbar() {
       {isMenuOpen && (
         <motion.div
           className="mobile-menu-portal"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{
+            opacity: 0,
+          }}
           transition={{
             duration: 0.2,
           }}
@@ -178,8 +190,13 @@ export default function Navbar() {
                   }}
                 >
                   <span>{link.number}</span>
+
                   <strong>{link.label}</strong>
-                  <ArrowUpRight size={17} aria-hidden="true" />
+
+                  <ArrowUpRight
+                    size={17}
+                    aria-hidden="true"
+                  />
                 </motion.a>
               ))}
             </nav>
@@ -189,6 +206,7 @@ export default function Navbar() {
                 href="https://github.com/NebaPrecious"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Open GitHub profile"
               >
                 <FaGithub size={18} aria-hidden="true" />
                 GitHub
@@ -198,8 +216,12 @@ export default function Navbar() {
                 href="https://linkedin.com/in/nebaprecious"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Open LinkedIn profile"
               >
-                <FaLinkedinIn size={18} aria-hidden="true" />
+                <FaLinkedinIn
+                  size={18}
+                  aria-hidden="true"
+                />
                 LinkedIn
               </a>
             </div>
@@ -249,7 +271,11 @@ export default function Navbar() {
             href="#contact"
           >
             <span>Let&apos;s talk</span>
-            <ArrowUpRight size={16} aria-hidden="true" />
+
+            <ArrowUpRight
+              size={16}
+              aria-hidden="true"
+            />
           </a>
 
           <button
@@ -261,6 +287,7 @@ export default function Navbar() {
                 : "Open navigation menu"
             }
             aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation-menu"
             onClick={() => {
               setIsMenuOpen((current) => !current);
             }}
@@ -274,7 +301,13 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {isMounted && createPortal(mobileMenu, document.body)}
+      {isMounted &&
+        createPortal(
+          <div id="mobile-navigation-menu">
+            {mobileMenu}
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
