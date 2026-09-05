@@ -16,32 +16,20 @@ import PersonStructuredData from "@/components/seo/PersonStructuredData";
 export default function Home() {
   return (
     <>
+      <PersonStructuredData />
+
       <div className="desktop-portfolio">
         <Navbar />
 
         <main>
           <Hero />
           <About />
-          <Projects />
           <Skills />
+          <Projects />
           <Creative />
           <Contact />
         </main>
       </div>
-
-      return (
-  <>
-    <PersonStructuredData />
-
-    <div className="desktop-portfolio">
-      {/* existing content */}
-    </div>
-
-    <div className="mobile-portfolio">
-      {/* existing content */}
-    </div>
-  </>
-);
 
       <div className="mobile-portfolio">
         <Navbar />
@@ -49,8 +37,8 @@ export default function Home() {
         <main>
           <MobileHero />
           <MobileAbout />
-          <MobileProjects />
           <MobileSkills />
+          <MobileProjects />
           <MobileCreative />
           <MobileContact />
         </main>

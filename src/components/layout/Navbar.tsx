@@ -25,31 +25,26 @@ const navigationLinks = [
     label: "About",
     desktopHref: "#about",
     mobileHref: "#mobile-about",
-    number: "01",
   },
   {
     label: "Projects",
     desktopHref: "#projects",
     mobileHref: "#mobile-projects",
-    number: "02",
   },
   {
     label: "Skills",
     desktopHref: "#skills",
     mobileHref: "#mobile-skills",
-    number: "03",
   },
   {
     label: "Creative",
     desktopHref: "#creative",
     mobileHref: "#mobile-creative",
-    number: "04",
   },
   {
     label: "Contact",
     desktopHref: "#contact",
     mobileHref: "#mobile-contact",
-    number: "05",
   },
 ];
 
@@ -189,8 +184,6 @@ export default function Navbar() {
                     duration: 0.3,
                   }}
                 >
-                  <span>{link.number}</span>
-
                   <strong>{link.label}</strong>
 
                   <ArrowUpRight
@@ -244,6 +237,7 @@ export default function Navbar() {
             aria-label="Go to homepage"
           >
             NP<span>.</span>
+            <small>Douala · CM</small>
           </a>
 
           <a
@@ -267,7 +261,7 @@ export default function Navbar() {
           </div>
 
           <a
-            className="nav-contact desktop-contact"
+            className="desktop-contact"
             href="#contact"
           >
             <span>Let&apos;s talk</span>

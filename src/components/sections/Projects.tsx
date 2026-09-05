@@ -13,8 +13,10 @@ export default function Projects() {
         <Reveal>
           <div className="section-heading">
             <div>
-              <p className="section-number">02</p>
-              <h2>Selected projects</h2>
+              <p className="section-label">Projects</p>
+              <h2>
+                Selected <span className="accent-word">projects</span>
+              </h2>
             </div>
 
             <p>

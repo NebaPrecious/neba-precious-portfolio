@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 import {
   ArrowUpRight,
   LockKeyhole,
-  Sparkles,
 } from "lucide-react";
 
 export default function MobileProjects() {
@@ -17,7 +16,6 @@ export default function MobileProjects() {
     >
       <div className="mobile-container">
         <motion.div
-          className="mobile-section-heading"
           initial={{
             opacity: 0,
             y: 22,
@@ -35,39 +33,12 @@ export default function MobileProjects() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div>
-            <span className="mobile-section-number">02</span>
+          <p className="mobile-kicker">Projects</p>
 
-            <p className="mobile-section-label">
-              Selected projects
-            </p>
-          </div>
-
-          <Sparkles size={19} aria-hidden="true" />
+          <h2 className="mobile-section-title">
+            Products shaped through code and purpose.
+          </h2>
         </motion.div>
-
-        <motion.h2
-          className="mobile-section-title"
-          initial={{
-            opacity: 0,
-            y: 22,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.2,
-          }}
-          transition={{
-            duration: 0.65,
-            delay: 0.06,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          Products shaped through code and purpose.
-        </motion.h2>
 
         <motion.p
           className="mobile-section-intro"
@@ -146,6 +117,7 @@ export default function MobileProjects() {
                 href="https://github.com/NebaPrecious"
                 target="_blank"
                 rel="noreferrer"
+                className="mobile-project-link"
               >
                 <span>View my GitHub</span>
                 <ArrowUpRight size={17} aria-hidden="true" />
@@ -235,7 +207,7 @@ export default function MobileProjects() {
                 <span>MySQL</span>
               </div>
 
-              <a href="#mobile-contact">
+              <a href="#mobile-contact" className="mobile-project-link">
                 <span>Details available on request</span>
                 <ArrowUpRight size={17} aria-hidden="true" />
               </a>

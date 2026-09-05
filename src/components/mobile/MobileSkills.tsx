@@ -1,19 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-  Blocks,
-  Braces,
-  Database,
-  Palette,
-  Wrench,
-} from "lucide-react";
 
 const skillGroups = [
   {
     title: "Frontend",
-    icon: Braces,
-    description: "Interfaces and responsive web experiences.",
     skills: [
       "HTML5",
       "CSS3",
@@ -27,8 +18,6 @@ const skillGroups = [
   },
   {
     title: "Backend",
-    icon: Database,
-    description: "APIs, application logic, and data systems.",
     skills: [
       "Node.js",
       "NestJS",
@@ -40,8 +29,6 @@ const skillGroups = [
   },
   {
     title: "Development tools",
-    icon: Wrench,
-    description: "Tools supporting my development workflow.",
     skills: [
       "Git",
       "GitHub",
@@ -52,11 +39,9 @@ const skillGroups = [
   },
   {
     title: "Creative tools",
-    icon: Palette,
-    description: "Tools supporting my visual and creative growth.",
     skills: [
       "Canva",
-      "Photoshop — Learning",
+      "Photoshop · Learning",
       "CapCut",
       "Visual Design",
       "Video Editing",
@@ -72,7 +57,6 @@ export default function MobileSkills() {
     >
       <div className="mobile-container">
         <motion.div
-          className="mobile-section-heading"
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -81,27 +65,12 @@ export default function MobileSkills() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div>
-            <span className="mobile-section-number">03</span>
-            <p className="mobile-section-label">Skills and tools</p>
-          </div>
+          <p className="mobile-kicker">Skills</p>
 
-          <Blocks size={19} aria-hidden="true" />
+          <h2 className="mobile-section-title">
+            The technologies supporting my work.
+          </h2>
         </motion.div>
-
-        <motion.h2
-          className="mobile-section-title"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{
-            duration: 0.65,
-            delay: 0.06,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          The technologies supporting my work.
-        </motion.h2>
 
         <motion.p
           className="mobile-section-intro"
@@ -118,40 +87,27 @@ export default function MobileSkills() {
         </motion.p>
 
         <div className="mobile-skill-groups">
-          {skillGroups.map((group, index) => {
-            const Icon = group.icon;
+          {skillGroups.map((group, index) => (
+            <motion.article
+              className="mobile-skill-group"
+              key={group.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: 0.62,
+                delay: index * 0.07,
+              }}
+            >
+              <h3>{group.title}</h3>
 
-            return (
-              <motion.article
-                className="mobile-skill-group"
-                key={group.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.62,
-                  delay: index * 0.07,
-                }}
-              >
-                <div className="mobile-skill-heading">
-                  <span>
-                    <Icon size={18} aria-hidden="true" />
-                  </span>
-
-                  <div>
-                    <h3>{group.title}</h3>
-                    <p>{group.description}</p>
-                  </div>
-                </div>
-
-                <div className="mobile-skill-pills">
-                  {group.skills.map((skill) => (
-                    <span key={skill}>{skill}</span>
-                  ))}
-                </div>
-              </motion.article>
-            );
-          })}
+              <div className="mobile-skill-tags">
+                {group.skills.map((skill) => (
+                  <span key={skill}>{skill}</span>
+                ))}
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

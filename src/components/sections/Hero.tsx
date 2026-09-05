@@ -1,122 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "motion/react";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-
-const textAnimation = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-};
+import Reveal from "@/components/animations/Reveal";
 
 export default function Hero() {
   return (
     <section className="hero section" id="home">
       <div className="container hero-grid">
-        <motion.div
-          className="hero-content"
-          initial="hidden"
-          animate="visible"
-          transition={{
-            staggerChildren: 0.12,
-            delayChildren: 0.15,
-          }}
-        >
-          <motion.p
-            className="eyebrow"
-            variants={textAnimation}
-            transition={{
-              duration: 0.65,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            Software Developer · Designer · Douala, Cameroon
-          </motion.p>
+        <div className="hero-content">
+          <Reveal>
+            <p className="hero-kicker">Software Developer · Designer · Douala, CM</p>
+          </Reveal>
 
-          <motion.h1
-            variants={textAnimation}
-            transition={{
-              duration: 0.75,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            Building digital products with
-            <span> purpose and creativity.</span>
-          </motion.h1>
+          <Reveal delay={0.08}>
+            <h1>
+              Digital products built with{" "}
+              <span className="accent-word">purpose</span> and{" "}
+              <span className="accent-word">resolve</span>.
+            </h1>
+          </Reveal>
 
-          <motion.p
-            className="hero-description"
-            variants={textAnimation}
-            transition={{
-              duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            I&apos;m Neba Precious Ngeh, a software developer and designer
-            creating practical digital experiences while growing through
-            technology, visual design, and storytelling.
-          </motion.p>
+          <Reveal delay={0.16}>
+            <p className="hero-description">
+              I&apos;m Neba Precious Ngeh, a software developer and designer
+              creating practical digital experiences while growing through
+              technology, visual design, and storytelling.
+            </p>
+          </Reveal>
 
-          <motion.div
-            className="hero-actions"
-            variants={textAnimation}
-            transition={{
-              duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <a className="button button-primary" href="#projects">
-              View my work
-              <ArrowDownRight size={18} aria-hidden="true" />
-            </a>
+          <Reveal delay={0.24}>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">
+                View my work
+                <ArrowDownRight size={18} aria-hidden="true" />
+              </a>
 
-            <a className="button button-secondary" href="#contact">
-              Let&apos;s connect
-              <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
-          </motion.div>
+              <a className="button button-secondary" href="#contact">
+                Let&apos;s connect
+                <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </Reveal>
 
-          <motion.div
-            className="hero-status"
-            variants={textAnimation}
-            transition={{
-              duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <span className="status-dot" aria-hidden="true" />
-            <span>
-              Building my brand and growing through meaningful work.
-            </span>
-          </motion.div>
-        </motion.div>
+          <Reveal delay={0.3}>
+            <div className="hero-status">
+              <span className="status-dot" aria-hidden="true" />
+              <span>Building my brand and growing through meaningful work.</span>
+            </div>
+          </Reveal>
+        </div>
 
-        <motion.div
-          className="hero-portrait"
-          initial={{
-            opacity: 0,
-            x: 50,
-            scale: 0.96,
-          }}
-          animate={{
-            opacity: 1,
-            x: 0,
-            scale: 1,
-          }}
-          transition={{
-            duration: 0.95,
-            delay: 0.3,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          <div className="portrait-glow" />
-
+        <Reveal className="hero-portrait" delay={0.18}>
           <div className="portrait-frame">
             <Image
               src="/neba-precious-profile.png"
@@ -126,18 +61,12 @@ export default function Hero() {
               sizes="(max-width: 900px) 85vw, 38vw"
               className="portrait-image"
             />
+            <div className="portrait-caption">
+              <span>Neba P. Ngeh</span>
+              <strong>Developer + Designer</strong>
+            </div>
           </div>
-
-          <div className="portrait-badge portrait-badge-top">
-            <span>Currently building</span>
-            <strong>Jangora</strong>
-          </div>
-
-          <div className="portrait-badge portrait-badge-bottom">
-            <span>Role</span>
-            <strong>Developer + Designer</strong>
-          </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

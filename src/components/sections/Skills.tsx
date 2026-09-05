@@ -39,7 +39,7 @@ const skillGroups = [
     title: "Creative",
     skills: [
       "Canva",
-      "Photoshop — Learning",
+      "Photoshop · Learning",
       "CapCut",
       "Visual Design",
       "Video Editing",
@@ -54,8 +54,10 @@ export default function Skills() {
         <Reveal>
           <div className="section-heading">
             <div>
-              <p className="section-number">03</p>
-              <h2>Skills and tools</h2>
+              <p className="section-label">Skills</p>
+              <h2>
+                Skills and <span className="accent-word">tools</span>
+              </h2>
             </div>
 
             <p>
@@ -67,7 +69,7 @@ export default function Skills() {
         <div className="skills-grid">
           {skillGroups.map((group, index) => (
             <Reveal key={group.title} delay={index * 0.08}>
-              <article className="skill-card">
+              <article className="skill-group">
                 <h3>{group.title}</h3>
 
                 <ul>

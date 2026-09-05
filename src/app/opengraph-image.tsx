@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Neba Precious Ngeh — Software Developer and Designer";
+  "Neba Precious Ngeh · Software Developer and Designer";
 
 export const size = {
   width: 1200,
@@ -127,7 +127,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.45,
             }}
           >
-            Neba Precious Ngeh — Full-stack development, product design and
+            Neba Precious Ngeh · Full-stack development, product design and
             creative digital experiences.
           </div>
         </div>

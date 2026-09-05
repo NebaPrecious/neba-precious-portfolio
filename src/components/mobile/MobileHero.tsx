@@ -44,9 +44,6 @@ export default function MobileHero() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div className="mobile-portrait-glow" />
-          <div className="mobile-portrait-decoration" />
-
           <div className="mobile-portrait-frame">
             <Image
               src="/neba-precious-profile.png"
@@ -57,53 +54,11 @@ export default function MobileHero() {
               className="mobile-portrait-image"
             />
 
-            <div className="mobile-portrait-overlay">
+            <div className="mobile-portrait-caption">
               <span>Neba Precious Ngeh</span>
               <strong>Software Developer and Designer</strong>
             </div>
           </div>
-
-          <motion.div
-            className="mobile-floating-card mobile-floating-card-left"
-            initial={{
-              opacity: 0,
-              x: -15,
-              y: 8,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.55,
-              delay: 0.4,
-            }}
-          >
-            <span>Currently building</span>
-            <strong>Jangora</strong>
-          </motion.div>
-
-          <motion.div
-            className="mobile-floating-card mobile-floating-card-right"
-            initial={{
-              opacity: 0,
-              x: 15,
-              y: 8,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.55,
-              delay: 0.5,
-            }}
-          >
-            <span>My role</span>
-            <strong>Developer + Designer</strong>
-          </motion.div>
         </motion.div>
 
         <motion.div
@@ -128,7 +83,7 @@ export default function MobileHero() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            Software Developer · Designer · Douala, Cameroon
+            Software Developer · Designer · Douala, CM
           </motion.p>
 
           <motion.h1
@@ -138,8 +93,9 @@ export default function MobileHero() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            Building digital products with
-            <span> purpose and creativity.</span>
+            Digital products built with{" "}
+            <span className="accent-word">purpose</span> and{" "}
+            <span className="accent-word">resolve</span>.
           </motion.h1>
 
           <motion.p

@@ -6,8 +6,10 @@ export default function About() {
       <div className="container section-grid">
         <Reveal>
           <div>
-            <p className="section-number">01</p>
-            <h2>About me</h2>
+            <p className="section-label">About</p>
+            <h2>
+              About <span className="accent-word">me</span>
+            </h2>
           </div>
         </Reveal>
 

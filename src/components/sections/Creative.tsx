@@ -1,14 +1,13 @@
 import Reveal from "@/components/animations/Reveal";
+import { ArrowUpRight } from "lucide-react";
 
 const creativeAreas = [
   {
-    number: "01",
     title: "Visual design",
     description:
       "Creating flyers with Canva while developing stronger design foundations and learning Adobe Photoshop.",
   },
   {
-    number: "02",
     title: "Video editing",
     description:
       "Editing event highlights, teasers, and general video content using CapCut.",
@@ -21,8 +20,10 @@ export default function Creative() {
       <div className="container section-grid">
         <Reveal>
           <div>
-            <p className="section-number">04</p>
-            <h2>Creative growth</h2>
+            <p className="section-label">Creative</p>
+            <h2>
+              Creative <span className="accent-word">growth</span>
+            </h2>
           </div>
         </Reveal>
 
@@ -34,13 +35,20 @@ export default function Creative() {
             </p>
           </Reveal>
 
-          <div className="creative-cards">
+          <div className="creative-list">
             {creativeAreas.map((area, index) => (
               <Reveal key={area.title} delay={0.15 + index * 0.1}>
-                <article>
-                  <span>{area.number}</span>
-                  <h3>{area.title}</h3>
-                  <p>{area.description}</p>
+                <article className="creative-item">
+                  <div>
+                    <h3>{area.title}</h3>
+                    <p>{area.description}</p>
+                  </div>
+
+                  <ArrowUpRight
+                    className="creative-arrow"
+                    size={22}
+                    aria-hidden="true"
+                  />
                 </article>
               </Reveal>
             ))}

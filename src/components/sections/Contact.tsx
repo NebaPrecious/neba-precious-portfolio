@@ -25,20 +25,14 @@ export default function Contact() {
     <section className="section contact-section" id="contact">
       <div className="container">
         <Reveal>
-          <p className="section-number">05</p>
+          <p className="section-label">Contact</p>
         </Reveal>
 
         <div className="contact-content">
           <Reveal delay={0.08}>
-            <p className="eyebrow">
-              Let&apos;s build something meaningful
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.14}>
             <h2>
-              Have an opportunity, project, or idea?
-              <span> Let&apos;s talk.</span>
+              Have an opportunity, project, or idea?{" "}
+              <span className="accent-word">Let&apos;s talk.</span>
             </h2>
           </Reveal>
 

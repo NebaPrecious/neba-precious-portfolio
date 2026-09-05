@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   FileText,
   Mail,
-  MessageCircle,
 } from "lucide-react";
 import {
   FaGithub,
@@ -44,24 +43,6 @@ export default function MobileContact() {
     >
       <div className="mobile-container">
         <motion.div
-          className="mobile-section-heading"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{
-            duration: 0.65,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          <div>
-            <span className="mobile-section-number">05</span>
-            <p className="mobile-section-label">Contact</p>
-          </div>
-
-          <MessageCircle size={19} aria-hidden="true" />
-        </motion.div>
-
-        <motion.div
           className="mobile-contact-panel"
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,8 +58,8 @@ export default function MobileContact() {
           </p>
 
           <h2>
-            Have an opportunity, project, or idea?
-            <span> Let&apos;s talk.</span>
+            Have an opportunity, project, or idea?{" "}
+            <span className="accent-word">Let&apos;s talk.</span>
           </h2>
 
           <p className="mobile-contact-description">
