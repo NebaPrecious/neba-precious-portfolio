@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import {
   useEffect,
   useState,
@@ -20,32 +21,16 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 
-const navigationLinks = [
-  {
-    label: "About",
-    desktopHref: "#about",
-    mobileHref: "#mobile-about",
-  },
-  {
-    label: "Projects",
-    desktopHref: "#projects",
-    mobileHref: "#mobile-projects",
-  },
-  {
-    label: "Skills",
-    desktopHref: "#skills",
-    mobileHref: "#mobile-skills",
-  },
-  {
-    label: "Creative",
-    desktopHref: "#creative",
-    mobileHref: "#mobile-creative",
-  },
-  {
-    label: "Contact",
-    desktopHref: "#contact",
-    mobileHref: "#mobile-contact",
-  },
+type NavLink =
+  | { label: string; section: string; href?: undefined }
+  | { label: string; href: string; section?: undefined };
+
+const navigationLinks: NavLink[] = [
+  { label: "About", section: "about" },
+  { label: "Projects", section: "projects" },
+  { label: "Skills", section: "skills" },
+  { label: "Creative", href: "/creatives" },
+  { label: "Contact", section: "contact" },
 ];
 
 function subscribeToClientState() {
@@ -54,6 +39,17 @@ function subscribeToClientState() {
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  function hrefFor(link: NavLink): string {
+    if (link.href) {
+      return link.href;
+    }
+    const hash = `#${link.section}`;
+    return isHome ? hash : `/${hash}`;
+  }
 
   const isMounted = useSyncExternalStore(
     subscribeToClientState,
@@ -168,8 +164,8 @@ export default function Navbar() {
             >
               {navigationLinks.map((link, index) => (
                 <motion.a
-                  href={link.mobileHref}
-                  key={link.mobileHref}
+                  href={hrefFor(link)}
+                  key={link.label}
                   onClick={closeMenu}
                   initial={{
                     opacity: 0,
@@ -233,7 +229,7 @@ export default function Navbar() {
         >
           <a
             className="brand desktop-brand"
-            href="#home"
+            href={isHome ? "#home" : "/"}
             aria-label="Go to homepage"
           >
             NP<span>.</span>
@@ -242,7 +238,7 @@ export default function Navbar() {
 
           <a
             className="brand mobile-brand"
-            href="#mobile-home"
+            href={isHome ? "#mobile-home" : "/"}
             aria-label="Go to mobile homepage"
             onClick={closeMenu}
           >
@@ -252,8 +248,8 @@ export default function Navbar() {
           <div className="nav-links">
             {navigationLinks.slice(0, 4).map((link) => (
               <a
-                href={link.desktopHref}
-                key={link.desktopHref}
+                href={hrefFor(link)}
+                key={hrefFor(link)}
               >
                 {link.label}
               </a>
@@ -262,7 +258,7 @@ export default function Navbar() {
 
           <a
             className="desktop-contact"
-            href="#contact"
+            href={isHome ? "#contact" : "/#contact"}
           >
             <span>Let&apos;s talk</span>
 
