@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Reveal from "@/components/animations/Reveal";
+import CreativesClient from "@/components/creatives/CreativesClient";
 
 export const metadata: Metadata = {
   title: "Creative work",
@@ -32,6 +33,10 @@ export default function CreativesPage() {
                   Visual designs and edited video pieces, collected in one place.
                 </p>
               </div>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <CreativesClient />
             </Reveal>
           </div>
         </section>
