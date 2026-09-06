@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 
 const creativeAreas = [
   {
@@ -14,6 +16,8 @@ const creativeAreas = [
       "Editing event highlights, promotional teasers, and general video content using CapCut.",
   },
 ];
+
+const MotionLink = motion(Link);
 
 export default function MobileCreative() {
   return (
@@ -54,23 +58,31 @@ export default function MobileCreative() {
 
         <div className="mobile-creative-list">
           {creativeAreas.map((area, index) => (
-            <motion.article
+            <MotionLink
               className="mobile-creative-item"
+              href="/creatives"
               key={area.title}
               initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: 0.65,
-                delay: index * 0.1,
-              }}
+              transition={{ duration: 0.65, delay: index * 0.1 }}
             >
               <h3>{area.title}</h3>
 
               <p>{area.description}</p>
-            </motion.article>
+
+              <ArrowUpRight
+                className="mobile-creative-arrow"
+                size={16}
+                aria-hidden="true"
+              />
+            </MotionLink>
           ))}
         </div>
+
+        <Link className="mobile-creative-more" href="/creatives">
+          View all work <ArrowUpRight size={14} aria-hidden="true" />
+        </Link>
       </div>
     </section>
   );

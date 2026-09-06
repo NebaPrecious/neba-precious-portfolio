@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "@/components/animations/Reveal";
 import { ArrowUpRight } from "lucide-react";
 
@@ -38,7 +39,7 @@ export default function Creative() {
           <div className="creative-list">
             {creativeAreas.map((area, index) => (
               <Reveal key={area.title} delay={0.15 + index * 0.1}>
-                <article className="creative-item">
+                <Link className="creative-item" href="/creatives" key={area.title}>
                   <div>
                     <h3>{area.title}</h3>
                     <p>{area.description}</p>
@@ -49,10 +50,17 @@ export default function Creative() {
                     size={22}
                     aria-hidden="true"
                   />
-                </article>
+                </Link>
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.35}>
+            <Link className="creative-more" href="/creatives">
+              View all work
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>
