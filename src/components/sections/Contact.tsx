@@ -55,10 +55,11 @@ export default function Contact() {
 
               <a
                 className="button button-secondary"
-                href="mailto:preciousngehneba@gmail.com?subject=Request%20for%20Neba%20Precious%27%20CV"
+                href="/neba-precious-cv.pdf"
+                download
               >
                 <FileText size={18} aria-hidden="true" />
-                Request my CV
+                Download my CV
               </a>
             </div>
           </Reveal>
