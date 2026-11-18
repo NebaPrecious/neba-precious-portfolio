@@ -1,14 +1,12 @@
 import { ImageResponse } from "next/og";
 
-export const alt =
-  "Neba Precious Ngeh · Software Developer and Designer";
-
-export const size = {
-  width: 1200,
-  height: 630,
-};
-
+export const alt = "Neba Precious — Software Engineer & Visual Creative";
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const INK = "#0b1a30";
+const PAPER = "#ccd6f6";
+const MINT = "#64ffda";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -17,133 +15,66 @@ export default function OpenGraphImage() {
         style={{
           width: "100%",
           height: "100%",
-          padding: "70px 80px",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          overflow: "hidden",
-          position: "relative",
-          background:
-            "linear-gradient(145deg, #07070a 0%, #0d0d13 55%, #130d1a 100%)",
-          color: "#f5f5f7",
+          background: INK,
+          color: PAPER,
         }}
       >
         <div
           style={{
-            position: "absolute",
-            width: 480,
-            height: 480,
-            top: -220,
-            right: -100,
-            borderRadius: "50%",
-            background: "rgba(168, 85, 247, 0.28)",
-            filter: "blur(55px)",
-          }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            width: 420,
-            height: 420,
-            bottom: -260,
-            left: -120,
-            borderRadius: "50%",
-            background: "rgba(34, 211, 238, 0.2)",
-            filter: "blur(50px)",
-          }}
-        />
-
-        <div
-          style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "space-between",
-            position: "relative",
+            padding: "44px 64px 0",
+            fontSize: 22,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            color: "#8892b0",
           }}
         >
+          <span>Portfolio — Software &amp; Studio</span>
+          <span>Douala, Cameroon</span>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", padding: "52px 64px 0", flex: 1 }}>
+          <span style={{ fontSize: 150, fontWeight: 800, letterSpacing: -7, lineHeight: 0.9 }}>Neba</span>
+          <span style={{ fontSize: 150, fontWeight: 800, letterSpacing: -7, lineHeight: 0.9, color: MINT }}>
+            Precious
+          </span>
+          <span style={{ marginTop: 34, fontSize: 34, fontWeight: 600 }}>
+            Software Engineer · Visual Creative
+          </span>
+        </div>
+
+        <div style={{ display: "flex", height: 120 }}>
           <div
             style={{
+              flex: 1,
               display: "flex",
               alignItems: "center",
-              fontSize: 42,
-              fontWeight: 800,
-              letterSpacing: "-4px",
+              padding: "0 64px",
+              background: "#112240",
+              color: PAPER,
+              fontSize: 34,
+              fontWeight: 700,
             }}
           >
-            NP
-            <span style={{ color: "#a855f7" }}>.</span>
+            Dev Pre_elite
           </div>
-
           <div
             style={{
-              padding: "12px 20px",
-              border: "1px solid rgba(255,255,255,0.16)",
-              borderRadius: 999,
-              color: "#b8b8c3",
-              fontSize: 18,
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              padding: "0 64px",
+              background: MINT,
+              color: INK,
+              fontSize: 34,
+              fontWeight: 700,
             }}
           >
-            Douala, Cameroon
+            Preelite Visual Creatives
           </div>
-        </div>
-
-        <div
-          style={{
-            maxWidth: 940,
-            display: "flex",
-            flexDirection: "column",
-            position: "relative",
-          }}
-        >
-          <span
-            style={{
-              marginBottom: 24,
-              color: "#22d3ee",
-              fontSize: 20,
-              letterSpacing: "3px",
-              textTransform: "uppercase",
-            }}
-          >
-            Software Developer · Designer
-          </span>
-
-          <div
-            style={{
-              fontSize: 76,
-              lineHeight: 0.98,
-              fontWeight: 750,
-              letterSpacing: "-5px",
-            }}
-          >
-            Building digital products with purpose and creativity.
-          </div>
-
-          <div
-            style={{
-              marginTop: 30,
-              color: "#a8a8b3",
-              fontSize: 25,
-              lineHeight: 1.45,
-            }}
-          >
-            Neba Precious Ngeh · Full-stack development, product design and
-            creative digital experiences.
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            position: "relative",
-            color: "#8d8d98",
-            fontSize: 18,
-          }}
-        >
-          <span>github.com/NebaPrecious</span>
-          <span>linkedin.com/in/nebaprecious</span>
         </div>
       </div>
     ),

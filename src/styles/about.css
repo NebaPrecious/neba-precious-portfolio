@@ -1,0 +1,155 @@
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+.about-hero {
+  padding-block: var(--space-8);
+  border-bottom: 1px solid var(--line);
+}
+
+.about-hero-grid {
+  display: grid;
+  gap: var(--space-7);
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .about-hero-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.about-title {
+  margin-top: var(--space-4);
+  font-size: var(--step-5);
+  font-weight: 850;
+  font-stretch: var(--wdth-wide);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.about-portrait {
+  width: min(100%, 380px);
+  margin-top: var(--space-6);
+}
+
+.about-story-side {
+  min-width: 0;
+}
+
+.about-story {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .about-story {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  }
+}
+
+.about-prose {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.about-prose > * + * {
+  margin-top: 1em;
+}
+
+.about-approach {
+  display: grid;
+  gap: var(--gutter);
+}
+
+@media (min-width: 900px) {
+  .about-approach {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.approach {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  min-height: 18rem;
+  padding: var(--space-7);
+  border-radius: var(--radius-lg);
+}
+
+.approach h2 {
+  font-size: var(--step-3);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.approach p:not(.eyebrow) {
+  max-width: 44ch;
+  opacity: 0.88;
+}
+
+.approach-source {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.approach-source h2 {
+  font-stretch: var(--wdth-narrow);
+}
+
+.approach-reel {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.approach-reel h2 {
+  font-stretch: var(--wdth-wide);
+}
+
+.approach .eyebrow,
+.approach .eyebrow-index {
+  color: inherit;
+  opacity: 0.75;
+}
+
+.about-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-5) var(--gutter);
+}
+
+.about-facts > div {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line-strong);
+}
+
+.about-facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.about-facts dd {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  font-size: var(--step-1);
+  font-weight: 550;
+  overflow-wrap: anywhere;
+}
+
+.about-note {
+  margin-top: var(--space-5);
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: var(--space-7);
+}

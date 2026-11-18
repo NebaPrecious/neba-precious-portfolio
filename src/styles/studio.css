@@ -1,0 +1,439 @@
+/* ==========================================================================
+   Studio (Preelite Visual Creatives) — screening room, cards, slate, viewer
+   ========================================================================== */
+
+.screen {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Film-grain texture: subtle, static, GPU-cheap. */
+.screen-grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.screen-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Home band ----------------------------------------------------------- */
+
+.studio-band {
+  padding-block: var(--space-9);
+}
+
+.studio-band-head {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .studio-band-head {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+  }
+}
+
+.studio-band-title {
+  margin-top: var(--space-4);
+  font-size: var(--step-5);
+  font-weight: 850;
+  font-stretch: var(--wdth-ultra);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+.studio-band-cats {
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+  margin-top: var(--space-5);
+  font-size: var(--step--1);
+  color: var(--text-2);
+}
+
+.studio-band-foot {
+  margin-top: var(--space-8);
+}
+
+/* ---- Creative grid & card ----------------------------------------------- */
+
+.creative-grid {
+  display: grid;
+  gap: var(--space-7) var(--gutter);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  align-items: start;
+}
+
+.creative-card {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.creative-card-media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.creative-card[data-aspect="portrait"] .creative-card-media {
+  aspect-ratio: 4 / 5;
+}
+
+.creative-card[data-aspect="square"] .creative-card-media {
+  aspect-ratio: 1;
+}
+
+.creative-card-media img {
+  transition: transform var(--dur-4) var(--ease-out), filter var(--dur-3) ease;
+}
+
+.creative-card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--dur-2) ease;
+}
+
+@media (hover: hover) {
+  .creative-card:hover .creative-card-media img {
+    transform: scale(1.04);
+  }
+
+  .creative-card:hover .creative-card-video {
+    opacity: 1;
+  }
+}
+
+.creative-card:focus-visible .creative-card-video {
+  opacity: 1;
+}
+
+.creative-card-nocover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-3);
+}
+
+.creative-card-play {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.creative-card:hover .creative-card-play {
+  transform: scale(1.12);
+}
+
+.creative-card-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.4rem;
+  font-size: var(--step--2);
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.creative-card-meta span:first-child {
+  color: var(--accent-text);
+}
+
+.creative-card-title {
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-stretch: var(--wdth-wide);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.creative-card-summary {
+  color: var(--text-2);
+  font-size: var(--step--1);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Slate (honest empty state) ---------------------------------------- */
+
+.slate {
+  max-width: 44rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.slate-bar {
+  height: 2.25rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--text) 0 22px,
+    var(--surface) 22px 44px
+  );
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.slate-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.4fr;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 560px) {
+  .slate-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.slate-grid div {
+  padding: 0.9rem 1rem;
+  border-right: 1px solid var(--line);
+}
+
+.slate-grid dt {
+  font-size: var(--step--2);
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.slate-grid dd {
+  margin-top: 0.3rem;
+  font-size: var(--step--1);
+  color: var(--text);
+}
+
+.slate-text {
+  padding: var(--space-6) 1rem;
+  font-size: var(--step-1);
+  color: var(--text-2);
+  max-width: 46ch;
+}
+
+/* ---- Studio page --------------------------------------------------------- */
+
+.studio-page {
+  min-height: 100dvh;
+}
+
+.studio-hero {
+  padding-block: var(--space-8) var(--space-7);
+}
+
+.studio-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.studio-hero-top .rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text);
+}
+
+.timecode {
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.studio-hero h1 {
+  margin-top: var(--space-7);
+  font-size: clamp(3rem, 1rem + 9.5vw, 12rem);
+  font-weight: 850;
+  font-stretch: var(--wdth-ultra);
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+}
+
+.studio-hero h1 span {
+  display: block;
+}
+
+.studio-hero h1 span:last-child {
+  color: var(--accent);
+}
+
+.studio-hero-foot {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-7);
+}
+
+@media (min-width: 900px) {
+  .studio-hero-foot {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    align-items: end;
+  }
+}
+
+.letterbox {
+  height: clamp(0.5rem, 1.2vw, 1rem);
+  background: oklch(0.06 0.01 262);
+}
+
+.studio-toolbar {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  margin-bottom: var(--space-7);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---- Viewer (detail) ----------------------------------------------------- */
+
+.viewer {
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.viewer-stage {
+  position: relative;
+  margin-top: var(--space-5);
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: oklch(0.06 0 0);
+}
+
+.viewer-stage[data-aspect="landscape"] {
+  aspect-ratio: 16 / 9;
+}
+
+.viewer-stage[data-aspect="portrait"] {
+  aspect-ratio: 9 / 16;
+  max-height: 82svh;
+  margin-inline: auto;
+}
+
+.viewer-stage[data-aspect="square"] {
+  aspect-ratio: 1;
+  max-height: 82svh;
+  margin-inline: auto;
+}
+
+.viewer-stage video,
+.viewer-stage iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+  background: oklch(0.06 0 0);
+}
+
+.viewer-stage .viewer-image {
+  position: absolute;
+  inset: 0;
+}
+
+.viewer-external {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+  background: oklch(0.06 0 0 / 0.55);
+}
+
+.viewer-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .viewer-head {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+}
+
+.viewer-head h1 {
+  font-size: var(--step-5);
+  font-weight: 850;
+  font-stretch: var(--wdth-wide);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+/* Studio hero copy inside the 3D toy box */
+.studio-title {
+  font-stretch: var(--wdth-wide);
+}
+
+.play-overlay .studio-hero-top {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.play-copy .studio-band-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin-top: var(--space-5);
+}
+
+.creative-card-tilt {
+  border-radius: var(--radius);
+}
+
+/* Studio page: editorial masonry so 16:9, 9:16 and 1:1 pieces pack tightly. */
+.studio-page .creative-grid,
+.studio-band .creative-grid {
+  display: block;
+  columns: 3 17rem;
+  column-gap: var(--gutter);
+}
+
+.studio-page .creative-grid > *,
+.studio-band .creative-grid > * {
+  break-inside: avoid;
+  margin-bottom: var(--space-7);
+}

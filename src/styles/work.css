@@ -1,0 +1,350 @@
+/* ==========================================================================
+   Work (Dev Pre_elite) — project plates, index, detail
+   ========================================================================== */
+
+.project-plates {
+  display: grid;
+  gap: var(--space-9);
+}
+
+.project-plate {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .project-plate {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-8);
+  }
+
+  .project-plate[data-flip="true"] {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .project-plate[data-flip="true"] .project-plate-visual {
+    order: 2;
+  }
+}
+
+.project-plate-visual {
+  display: block;
+}
+
+.project-plate-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+
+.project-plate-title {
+  margin-top: var(--space-3);
+  font-size: var(--step-5);
+  font-weight: 800;
+  font-stretch: var(--wdth-narrow);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.project-plate-title a {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 0.08em;
+  background-position: 0 92%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur-3) var(--ease-out);
+}
+
+.project-plate-title a:hover {
+  background-size: 100% 0.08em;
+}
+
+.project-plate-summary {
+  margin-top: var(--space-4);
+  max-width: 48ch;
+  color: var(--text-2);
+}
+
+.project-plate .tag-list {
+  margin-top: var(--space-5);
+}
+
+.project-plate-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--text-3);
+}
+
+.project-plate-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: var(--space-6);
+}
+
+/* ---- Plate (screens on a neutral ground) ------------------------------- */
+
+.plate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 5 / 4;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 64px),
+    var(--surface);
+  border-radius: var(--radius-lg);
+}
+
+.plate-empty {
+  color: var(--text-3);
+}
+
+.plate-phone {
+  position: relative;
+  width: clamp(5.5rem, 24%, 11.5rem);
+  border-radius: clamp(0.8rem, 2vw, 1.4rem);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.plate-phone img {
+  width: 100%;
+  height: auto;
+}
+
+.plate-phones {
+  gap: clamp(0.6rem, 2vw, 1.5rem);
+}
+
+.plate-phones .plate-phone {
+  transform: translateY(calc((var(--i) - 1) * -6%));
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+.plate-phones[data-count="2"] .plate-phone {
+  transform: translateY(calc(var(--i) * 8% - 4%));
+}
+
+.plate-single-phone .plate-phone {
+  width: clamp(7rem, 32%, 13rem);
+}
+
+.plate-wide {
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.plate-wide img {
+  width: 100%;
+  height: auto;
+}
+
+@media (hover: hover) {
+  .project-plate:hover .plate-phones .plate-phone {
+    transform: translateY(calc((var(--i) - 1) * -10%));
+  }
+}
+
+/* ---- Work index ---------------------------------------------------------- */
+
+.page-hero {
+  padding-block: var(--space-8) var(--space-7);
+  border-bottom: 1px solid var(--line);
+}
+
+.page-hero-grid > :first-child {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.page-hero h1 {
+  margin-top: var(--space-4);
+  /* Long single words (e.g. "PharmaCompare") must fit narrow screens. */
+  font-size: min(var(--step-6), 14.5cqi);
+  overflow-wrap: break-word;
+  font-weight: 850;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+.page-hero-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .page-hero-grid {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: end;
+  }
+}
+
+.work-hero h1 {
+  font-stretch: var(--wdth-narrow);
+}
+
+.work-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--line);
+}
+
+.work-count {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-3);
+}
+
+/* ---- Project detail ------------------------------------------------------ */
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-3);
+  transition: color var(--dur-1) ease;
+}
+
+.detail-back:hover {
+  color: var(--text);
+}
+
+.detail-hero h1 {
+  font-stretch: var(--wdth-narrow);
+}
+
+.detail-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: var(--space-5) var(--gutter);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-meta dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.detail-meta dd {
+  margin-top: 0.35rem;
+  font-weight: 550;
+}
+
+.detail-body {
+  display: grid;
+  gap: var(--space-7);
+  padding-block: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .detail-body {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  }
+}
+
+.detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: var(--space-6);
+}
+
+.notice {
+  display: flex;
+  gap: 0.75rem;
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: var(--step--1);
+}
+
+.notice svg {
+  flex: none;
+  margin-top: 0.2rem;
+  color: var(--accent-text);
+}
+
+.gallery {
+  display: grid;
+  gap: var(--gutter);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  align-items: start;
+}
+
+.gallery-wide {
+  grid-template-columns: 1fr;
+}
+
+.gallery figure {
+  margin: 0;
+}
+
+.gallery .frame-media {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+}
+
+.pager a {
+  display: grid;
+  gap: 0.3rem;
+  padding-block: var(--space-6);
+  transition: color var(--dur-1) ease;
+}
+
+.pager a:hover {
+  color: var(--accent-text);
+}
+
+.pager a + a,
+.pager .pager-next {
+  text-align: right;
+  justify-items: end;
+  grid-column: 2;
+}
+
+.pager strong {
+  font-size: var(--step-3);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}

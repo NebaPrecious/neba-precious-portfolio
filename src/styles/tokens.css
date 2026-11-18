@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Design tokens — "Source & Reel"
+   Deep navy + mint signal. Dark ("Night") is the default; light ("Day") is
+   one toggle away. `.screen` = studio screening room (always dark).
+   `.theme-dark` forces the Night palette on a region (e.g. the footer).
+   The brand colour lives in --accent / --accent-text only.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Colour: Day (light) --------------------------------------------- */
+  --bg: oklch(0.975 0.005 250);
+  --surface: oklch(0.948 0.009 250);
+  --surface-2: oklch(0.915 0.013 250);
+  --text: oklch(0.255 0.05 262);
+  --text-2: oklch(0.42 0.04 260);
+  --text-3: oklch(0.515 0.03 258);
+  --line: oklch(0.255 0.05 262 / 0.12);
+  --line-strong: oklch(0.255 0.05 262 / 0.28);
+  --inverse-bg: oklch(0.205 0.045 262);
+  --inverse-text: oklch(0.9 0.025 255);
+
+  /* Mint signal. `--accent-text` is tuned for 4.5:1 on --bg. */
+  --accent: oklch(0.66 0.12 178);
+  --accent-text: oklch(0.49 0.095 182);
+  --accent-soft: oklch(0.66 0.12 178 / 0.13);
+  --on-accent: oklch(0.2 0.045 262);
+  /* Cursor spotlight tint. */
+  --glow: oklch(0.66 0.12 178 / 0.1);
+
+  --gold: oklch(0.7 0.14 85);
+
+  --success: oklch(0.55 0.13 155);
+  --warning: oklch(0.62 0.14 70);
+  --danger: oklch(0.55 0.19 25);
+
+  --focus: oklch(0.55 0.11 182);
+  --shadow: 0 1px 0 oklch(0.2 0.04 262 / 0.04), 0 18px 40px -24px oklch(0.2 0.04 262 / 0.35);
+
+  /* ---- Typography ------------------------------------------------------ */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --step--2: clamp(0.69rem, 0.67rem + 0.08vw, 0.75rem);
+  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.35vw, 1.375rem);
+  --step-2: clamp(1.4rem, 1.25rem + 0.75vw, 1.875rem);
+  --step-3: clamp(1.8rem, 1.5rem + 1.5vw, 2.75rem);
+  --step-4: clamp(2.3rem, 1.8rem + 2.6vw, 4.25rem);
+  --step-5: clamp(2.9rem, 2rem + 4.6vw, 6.75rem);
+  --step-6: clamp(3.4rem, 1.9rem + 7.6vw, 10.5rem);
+
+  /* Width axis — Archivo wdth. Source (dev) runs narrow, Reel (studio) wide. */
+  --wdth-narrow: 82%;
+  --wdth-normal: 100%;
+  --wdth-wide: 118%;
+  --wdth-ultra: 125%;
+
+  --leading-tight: 0.92;
+  --leading-snug: 1.15;
+  --leading-body: 1.6;
+
+  --measure: 66ch;
+
+  /* ---- Space & layout -------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  --space-8: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  --space-9: clamp(5rem, 3rem + 8vw, 10rem);
+
+  --gutter: clamp(1rem, 0.5rem + 2.6vw, 3rem);
+  --max-width: 1440px;
+  --header-height: 4.25rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-1: 160ms;
+  --dur-2: 320ms;
+  --dur-3: 700ms;
+  --dur-4: 1100ms;
+}
+
+/* ---- Colour: Night (dark, default) ------------------------------------ */
+:root[data-theme="dark"],
+.theme-dark,
+.screen {
+  color-scheme: dark;
+
+  --bg: oklch(0.205 0.045 262);
+  --surface: oklch(0.245 0.052 262);
+  --surface-2: oklch(0.29 0.052 262);
+  --text: oklch(0.9 0.025 255);
+  --text-2: oklch(0.75 0.035 256);
+  --text-3: oklch(0.66 0.035 256);
+  --line: oklch(0.9 0.025 255 / 0.1);
+  --line-strong: oklch(0.9 0.025 255 / 0.24);
+  --inverse-bg: oklch(0.9 0.025 255);
+  --inverse-text: oklch(0.205 0.045 262);
+
+  --accent: oklch(0.9 0.135 172);
+  --accent-text: oklch(0.9 0.135 172);
+  --accent-soft: oklch(0.9 0.135 172 / 0.1);
+  --on-accent: oklch(0.205 0.045 262);
+  --glow: oklch(0.55 0.15 255 / 0.15);
+
+  --gold: oklch(0.83 0.13 88);
+
+  --success: oklch(0.78 0.14 160);
+  --warning: oklch(0.82 0.13 80);
+  --danger: oklch(0.72 0.16 25);
+
+  --focus: oklch(0.9 0.135 172);
+  --shadow: 0 1px 0 oklch(0 0 0 / 0.25), 0 24px 48px -28px oklch(0.1 0.04 262 / 0.9);
+}
+
+/* Elements inside a forced-dark region inherit the right base colours. */
+.theme-dark,
+.screen {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* The screening room is deeper and more neutral than the Night palette. */
+.screen {
+  --bg: oklch(0.135 0.02 262);
+  --surface: oklch(0.18 0.025 262);
+  --surface-2: oklch(0.225 0.03 262);
+}

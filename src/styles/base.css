@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Base — element defaults, accessibility, utilities
+   ========================================================================== */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  background: var(--bg);
+  transition: background-color var(--dur-2) ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  /* Transparent so the fixed cursor spotlight (z-index -1) can show through;
+     the page colour comes from <html>. */
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  transition: background-color var(--dur-2) ease, color var(--dur-2) ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Accessibility helpers ---------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--inverse-bg);
+  color: var(--inverse-text);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transform: translateY(-160%);
+  transition: transform var(--dur-1) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ---- Layout primitives --------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+.section {
+  padding-block: var(--space-9);
+}
+
+.section + .section {
+  border-top: 1px solid var(--line);
+}
+
+.stack > * + * {
+  margin-top: var(--stack-space, var(--space-4));
+}
+
+.prose {
+  max-width: var(--measure);
+  color: var(--text-2);
+}
+
+.prose p + p {
+  margin-top: 1em;
+}
+
+/* ---- Typographic roles --------------------------------------------------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.eyebrow-index {
+  color: var(--accent-text);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  letter-spacing: 0;
+}
+
+.display {
+  font-size: var(--step-5);
+  font-weight: 800;
+  font-stretch: var(--wdth-normal);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.035em;
+}
+
+.display-wide {
+  font-stretch: var(--wdth-wide);
+  letter-spacing: -0.03em;
+}
+
+.display-narrow {
+  font-stretch: var(--wdth-narrow);
+  letter-spacing: -0.025em;
+}
+
+.title {
+  font-size: var(--step-4);
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--text-2);
+  max-width: 54ch;
+}
+
+.accent {
+  color: var(--accent-text);
+}
+
+.muted {
+  color: var(--text-3);
+}
+
+/* ---- Reveal (used by <Reveal>) ------------------------------------------ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Never hide content when JS is unavailable. */
+.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

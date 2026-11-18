@@ -1,6 +1,6 @@
 # Local Development
 
-This project is a Next.js 16 portfolio app using the App Router, React 19, TypeScript, ESLint, Tailwind CSS 4, Motion, Lucide React, and React Icons.
+This project is a full-stack Next.js 16 portfolio (App Router, React 19, TypeScript, PostgreSQL + Drizzle). **Database, admin and service setup are documented in `README.md`** — you need a reachable `DATABASE_URL` before `npm run dev` or `npm run build`.
 
 ## Confirmed local toolchain
 
@@ -8,7 +8,7 @@ Verified on this machine:
 
 - Node.js: v24.19.0
 - npm: 11.17.0
-- Next.js: 16.3.4
+- Next.js: 16.4.6
 
 Next.js 16 requires Node.js 20.9 or newer.
 
@@ -71,9 +71,9 @@ npm run build
 npm run start
 ```
 
-Then open `http://localhost:3005`.
+Then open `http://localhost:3000` (`next start` uses port 3000 unless you pass `-p`).
 
 ## Notes
 
 - Next.js 16 uses Turbopack by default for `next dev` and `next build`.
-- Dependencies have been updated to Next.js 16.3.4 / eslint-config-next 16.3.4 so `npm audit` reports zero vulnerabilities.
+- Next.js was upgraded to 16.4.6 (security fixes, including an `ImageResponse` RCE advisory). `npm audit --omit=dev` reports zero vulnerabilities; remaining advisories are in dev-only tooling.
