@@ -33,7 +33,7 @@ export default async function ContactPage() {
               </span>
             </h1>
             <p className="play-intro">
-              Software, a website, a video edit or a collaboration — tell me what you have in mind and I&apos;ll
+              Software, a website, a video edit or a collaboration? Tell me what you have in mind and I&apos;ll
               get back to you.
             </p>
           </div>

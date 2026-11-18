@@ -14,12 +14,14 @@ import {
   CuboidCollider,
   Physics,
   RigidBody,
+  useRapier,
   type RapierRigidBody,
 } from "@react-three/rapier";
 import { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { haptic, onShake, setGravity, tilt } from "./motion";
 import { usePalette } from "./palette";
-import type { PropKind, ToyboxScene } from "./types";
+import type { ToyboxScene } from "./types";
 
 /* --------------------------------------------------------- letter texture */
 
@@ -353,6 +355,23 @@ function Pusher({ active, glow }: { active: React.RefObject<boolean>; glow: stri
   );
 }
 
+/** Phone tilt steers gravity, so the toys roll around the floor. */
+function TiltGravity({ registry }: { registry: React.RefObject<RapierRigidBody[]> }) {
+  const { world } = useRapier();
+  const last = useRef({ x: 0, z: 0 });
+  useFrame(() => {
+    if (!tilt.enabled) return;
+    const gx = tilt.x * 22;
+    const gz = tilt.y * 16;
+    setGravity(world, gx, -24, gz);
+    if (Math.abs(gx - last.current.x) + Math.abs(gz - last.current.z) > 1.2) {
+      last.current = { x: gx, z: gz };
+      registry.current.forEach((b) => b.wakeUp());
+    }
+  });
+  return null;
+}
+
 /** Frames the play area for any aspect ratio (phones look from further back). */
 function CameraRig() {
   const { camera, size, pointer } = useThree();
@@ -435,13 +454,27 @@ function Scene({
       },
     }));
 
+    // Shake the phone to toss everything.
+    useEffect(
+      () =>
+        onShake(() => {
+          haptic(30);
+          apiRef.current?.bounce(true);
+        }),
+      [apiRef],
+    );
+
+    // Phones (portrait): a calmer scene with just the main word and a few toys.
+    const { size } = useThree();
+    const narrow = size.width / size.height < 0.8;
     const [first = "", second = ""] = scene.words;
     const big = [...first];
-    const small = [...second];
+    const small = narrow ? [] : [...second];
+    const sceneProps = narrow ? scene.props.filter((p) => p !== "marbles").slice(0, 1) : scene.props;
+    const marbleCount = narrow ? Math.min(3, scene.props.filter((p) => p === "marbles").length * 3) : scene.props.filter((p) => p === "marbles").length * 5;
     // Big blocks shrink a little for long words so they fit the play area.
     const bigSize = big.length > 5 ? 1.35 : 1.7;
     const bigGap = bigSize + 0.35;
-    const count = (kind: PropKind) => scene.props.filter((p) => p === kind).length;
     // Props are spread across fixed spawn spots, left and right of the words.
     const spots: [number, number, number][] = [
       [-2.9, 9, 1.5],
@@ -482,6 +515,7 @@ function Scene({
 
         <Physics gravity={[0, -24, 0]}>
           <Walls />
+          <TiltGravity registry={registry} />
           <Pusher active={pointerActive} glow={palette.accent} />
 
           {big.map((letter, i) => (
@@ -509,7 +543,7 @@ function Scene({
             />
           ))}
 
-          {scene.props.map((kind, i) => {
+          {sceneProps.map((kind, i) => {
             const at = next();
             switch (kind) {
               case "brackets":
@@ -528,7 +562,7 @@ function Scene({
                 return null;
             }
           })}
-          {Array.from({ length: count("marbles") * 5 }, (_, i) => (
+          {Array.from({ length: marbleCount }, (_, i) => (
             <Marble
               key={`m-${i}`}
               registry={registry}

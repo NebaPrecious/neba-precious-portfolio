@@ -68,7 +68,7 @@ export default async function InboxPage({ searchParams }: PageProps<"/admin/inbo
                   {e.status === "handled" && <span className="badge badge-success">Handled</span>}
                 </div>
                 <p className="row-sub">
-                  {e.name} · {e.email} — {e.message.slice(0, 120)}
+                  {e.name} · {e.email} · {e.message.slice(0, 120)}
                 </p>
               </div>
               <span className="mono muted" style={{ fontSize: "var(--step--2)", whiteSpace: "nowrap" }}>

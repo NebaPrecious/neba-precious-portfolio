@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { Hand, MousePointer2, Sparkles } from "lucide-react";
+import { enableMotion, haptic, isTouchDevice, motionNeedsPermission, startMotion, tilt } from "./motion";
 import type { PlaygroundHandle } from "./Playground";
 import type { SceneSpec } from "./types";
 
@@ -25,13 +25,6 @@ function canPlay() {
     return false;
   }
 }
-
-const hints: Record<SceneSpec["type"], string> = {
-  toybox: "Move to push · Click to bounce",
-  devices: "Drag to spin · Click a screen to open",
-  orbit: "Drag to spin · Click a frame to watch",
-  lanyard: "Grab the badge · Fling it",
-};
 
 /**
  * Hero with an interactive 3D scene behind the copy. Every page gets a
@@ -60,6 +53,11 @@ export default function PlayHero({
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(true);
+  // Phones: start the tilt/shake sensors. iOS needs a tap first, so motion
+  // access is requested quietly on the first tap inside the hero.
+  useEffect(() => {
+    if (isTouchDevice()) startMotion();
+  }, []);
 
   useEffect(() => {
     if (!canPlay()) return;
@@ -81,9 +79,11 @@ export default function PlayHero({
   }, []);
 
   function onPointerDown(event: React.PointerEvent<HTMLElement>) {
+    if (event.pointerType !== "mouse" && motionNeedsPermission() && !tilt.enabled) void enableMotion();
     if (scene.type !== "toybox") return;
     if ((event.target as HTMLElement).closest("a, button, input, textarea, select")) return;
     apiRef.current?.bounce();
+    if (event.pointerType !== "mouse") haptic(10);
   }
 
   const word = fallbackWord ?? (scene.type === "toybox" ? scene.words[0] : "");
@@ -120,19 +120,6 @@ export default function PlayHero({
 
       {children}
 
-      {enabled && (
-        <div className="play-hint wrap">
-          <span className="mono">
-            {scene.type === "lanyard" ? <Hand size={13} aria-hidden="true" /> : <MousePointer2 size={13} aria-hidden="true" />}{" "}
-            {hints[scene.type]}
-          </span>
-          {scene.type === "toybox" && (
-            <button type="button" className="play-toss" onClick={() => apiRef.current?.bounce(true)}>
-              <Sparkles size={14} aria-hidden="true" /> Toss everything
-            </button>
-          )}
-        </div>
-      )}
     </section>
   );
 }

@@ -176,7 +176,7 @@ function ContactFormInner({ email, onReset }: { email: string; onReset: () => vo
           aria-describedby={["message-hint", describe("message")].filter(Boolean).join(" ")}
         />
         <p className="field-hint" id="message-hint">
-          A few lines about the project, role or idea — timelines and links help.
+          A few lines about the project, role or idea. Timelines and links help.
         </p>
         {errors.message && (
           <p className="field-error" id="message-error">

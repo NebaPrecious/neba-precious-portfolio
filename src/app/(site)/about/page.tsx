@@ -14,7 +14,7 @@ import "@/styles/about.css";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Neba Precious — a software engineer and visual creative based in Douala, Cameroon.",
+    "About Neba Precious, a software engineer and visual creative based in Douala, Cameroon.",
   alternates: { canonical: "/about" },
 };
 
@@ -99,17 +99,17 @@ export default async function AboutPage() {
         <div className="wrap about-approach">
           <Reveal className="approach approach-source">
             <p className="eyebrow">
-              <span className="eyebrow-index">B</span> Source — {profile.devBrand}
+              <span className="eyebrow-index">B</span> Source · {profile.devBrand}
             </p>
             <h2>On engineering</h2>
-            <p>{profile.engineeringApproach || "—"}</p>
+            <p>{profile.engineeringApproach}</p>
           </Reveal>
           <Reveal delay={0.08} className="approach approach-reel">
             <p className="eyebrow">
-              <span className="eyebrow-index">C</span> Reel — {profile.studioBrand}
+              <span className="eyebrow-index">C</span> Reel · {profile.studioBrand}
             </p>
             <h2>On visual work</h2>
-            <p>{profile.creativeApproach || "—"}</p>
+            <p>{profile.creativeApproach}</p>
           </Reveal>
         </div>
       </section>

@@ -9,7 +9,7 @@ import "@/styles/play.css";
 import "@/styles/studio.css";
 
 export const metadata: Metadata = {
-  title: "Preelite Visual Creatives — Studio",
+  title: "Preelite Visual Creatives | Studio",
   description:
     "Preelite Visual Creatives is the studio of Neba Precious: video editing, videography and social media creatives from Douala, Cameroon.",
   alternates: { canonical: "/studio" },
@@ -65,7 +65,7 @@ export default async function StudioPage() {
             <Timecode />
           </div>
           <div className="play-copy">
-            <p className="eyebrow play-eyebrow">02 · Reel — Studio</p>
+            <p className="eyebrow play-eyebrow">02 · Reel · Studio</p>
             <h1 id="hero-title" className="play-title studio-title">
               <span>{first}</span> <span className="accent">
                 {rest.slice(0, -1).join(" ")}{" "}
@@ -76,7 +76,7 @@ export default async function StudioPage() {
               </span>
             </h1>
             <p className="play-intro">
-              The studio side of {profile.displayName}&apos;s practice — video editing, videography and social
+              The studio side of {profile.displayName}&apos;s practice: video editing, videography and social
               media creatives, made for the screens people actually watch.
             </p>
             <ul className="studio-band-cats mono" aria-label="Disciplines">

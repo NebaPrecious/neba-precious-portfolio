@@ -15,7 +15,7 @@ export default async function AdminCvPage() {
           <h1>CV</h1>
           <p>
             Visitors download your CV from the stable link <code>/cv</code>, which always points to the file
-            published here. Upload a new PDF to replace it — old versions stay in the media library until you
+            published here. Upload a new PDF to replace it. Old versions stay in the media library until you
             delete them.
           </p>
         </div>

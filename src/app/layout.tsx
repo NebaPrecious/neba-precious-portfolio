@@ -16,15 +16,15 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const title = "Neba Precious — Software Engineer & Visual Creative";
+const title = "Neba Precious | Software Engineer & Visual Creative";
 const description =
-  "Neba Precious is a software engineer (Dev Pre_elite) and visual creative (Preelite Visual Creatives) based in Douala, Cameroon — building practical digital products and telling stories through video.";
+  "Neba Precious is a software engineer (Dev Pre_elite) and visual creative (Preelite Visual Creatives) based in Douala, Cameroon, building practical digital products and telling stories through video.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s — Neba Precious",
+    template: "%s | Neba Precious",
   },
   description,
   applicationName: "Neba Precious",
@@ -85,6 +85,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   colorScheme: "dark light",
+  // Lets the dock sit above the iPhone home indicator (safe-area insets).
+  viewportFit: "cover",
   themeColor: "#0b1a30",
 };
 

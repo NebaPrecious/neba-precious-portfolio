@@ -9,7 +9,7 @@ import "@/styles/admin.css";
 export const instant = false;
 
 export const metadata: Metadata = {
-  title: { default: "Admin", template: "%s — Admin" },
+  title: { default: "Admin", template: "%s | Admin" },
   robots: { index: false, follow: false },
 };
 

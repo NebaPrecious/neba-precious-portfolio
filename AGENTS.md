@@ -33,6 +33,11 @@ and decisions.
   - Theme is set with `data-theme` on `<html>`, applied before paint by the inline
     script in `src/app/layout.tsx` and stored in the `theme` cookie.
   - `.screen` forces the dark "screening room" palette (used by the Studio).
+- **Mobile first-class:** `src/styles/mobile.css` (loaded globally). Below 860px
+  the site uses `MobileDock` for navigation and a header that hides on scroll.
+  Selectors there are prefixed with `:root` so they beat page stylesheets, which
+  load later. Phone tilt and shake feed the 3D scenes through
+  `src/components/play/motion.ts`.
 - **Server code** lives in `src/server/`:
   - `db/` holds the schema and client. `client.ts` has no `server-only` so CLI
     scripts can use it.

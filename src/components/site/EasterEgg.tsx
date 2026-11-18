@@ -12,7 +12,7 @@ const LETTERS = "NEBAPRECIOUS</>▶";
 export default function EasterEgg() {
   useEffect(() => {
     console.log(
-      "%c▚ Neba Precious %c Hey, curious dev 👋 — type “play” anywhere on the page.",
+      "%c▚ Neba Precious %c Hey, curious dev 👋 Type “play” anywhere on the page.",
       "background:#64ffda;color:#0b1a30;font-weight:800;padding:4px 8px;border-radius:4px",
       "color:#8892b0",
     );

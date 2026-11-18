@@ -20,7 +20,7 @@ export default function RefreshSiteButton() {
       </ActionButton>
       {done && (
         <span className="field-hint" role="status">
-          Done — the public pages now show the latest content.
+          Done. The public pages now show the latest content.
         </span>
       )}
     </div>

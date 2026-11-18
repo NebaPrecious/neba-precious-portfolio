@@ -77,21 +77,6 @@ enquiries are saved to the inbox only.
 | `npm run db:studio` | Drizzle Studio (DB browser) |
 | `npm run admin:create` | Create the admin account (`-- --reset` changes the password and signs out every session) |
 
-## Sample content (preview the full site)
-
-```bash
-npm run samples:add      # 6 studio pieces + 2 projects, clearly marked “Sample”
-npm run samples:remove   # delete them all again
-```
-
-The samples use generated placeholder media from `public/samples`: branded covers
-and short looping WebM clips stamped **SAMPLE**. There's no stock or third-party
-footage. Each entry has `is_sample = true` and shows a gold "Sample" badge on the
-site and in the admin.
-
-Scripts write to the database directly, so afterwards click **Refresh live site**
-in Admin → Overview (or restart `npm run dev`) to see the change.
-
 ## Admin account
 
 There is no public sign-up. Create the account from a terminal that can reach the

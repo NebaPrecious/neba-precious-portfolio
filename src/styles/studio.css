@@ -437,3 +437,8 @@
   break-inside: avoid;
   margin-bottom: var(--space-7);
 }
+
+/* Touch: videos that autoplay in view fade in over the cover. */
+.creative-card-video.is-playing {
+  opacity: 1;
+}

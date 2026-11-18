@@ -92,8 +92,6 @@ Project plates and studio cards also tilt in 3D under the pointer, with a glare.
 The studio grid is now a masonry layout so 16:9, 9:16 and 1:1 pieces pack
 together.
 
-**Sample content:** `npm run samples:add` / `samples:remove` (see README). Every
-sample shows a gold "Sample" badge.
 
 ## What I need from you
 
@@ -110,8 +108,6 @@ sample shows a gold "Sample" badge.
 
 ### Content (all editable in the admin)
 
-- [ ] **Remove the samples** once real work is in: `npm run samples:remove`, then
-  delete `public/samples/`.
 - [ ] **CV PDF:** Admin → CV.
 - [ ] **Studio work:** your own videos (MP4, MOV or WebM up to 100 MB) or
   YouTube/Vimeo links, plus a cover frame, title, short description, tools and

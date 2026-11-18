@@ -54,7 +54,7 @@ export default function ProjectPlate({
         {project.confidentialityNote && (
           <p className="project-plate-note">
             <LockKeyhole size={14} aria-hidden="true" />
-            Company-owned — limited public preview
+            Company-owned · limited public preview
           </p>
         )}
 

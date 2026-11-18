@@ -23,7 +23,7 @@ export default async function AdminProfilePage() {
       <div className="admin-page-head">
         <div>
           <h1>Profile</h1>
-          <p>Your name, story, contact details and portrait — used across the whole site.</p>
+          <p>Your name, story, contact details and portrait, used across the whole site.</p>
         </div>
       </div>
       <ProfileForm

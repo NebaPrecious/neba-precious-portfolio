@@ -18,7 +18,7 @@ export default async function AdminStudioPage({ searchParams }: PageProps<"/admi
       <div className="admin-page-head">
         <div>
           <h1>Preelite Visual Creatives</h1>
-          <p>Video edits, videography and social creatives shown on /studio. Only your own work — covers and videos come from your uploads.</p>
+          <p>Video edits, videography and social creatives shown on /studio. Only your own work: covers and videos come from your uploads.</p>
         </div>
         <Link className="btn btn-accent btn-sm" href="/admin/studio/new">
           <Plus size={15} aria-hidden="true" /> New studio work

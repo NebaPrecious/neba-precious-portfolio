@@ -49,10 +49,10 @@ export default function SiteFooter({ profile }: { profile: ProfileDTO }) {
         <div className="footer-grid">
           <div className="footer-brands">
             <p>
-              <strong>{profile.devBrand}</strong> — software engineering and digital products.
+              <strong>{profile.devBrand}</strong>: software engineering and digital products.
             </p>
             <p>
-              <strong>{profile.studioBrand}</strong> — video editing, videography and social media
+              <strong>{profile.studioBrand}</strong>: video editing, videography and social media
               creatives.
             </p>
           </div>

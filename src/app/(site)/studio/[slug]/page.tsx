@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/studio/[slug]">):
   const image = item.cover ?? item.video;
   const imageUrl = image?.kind === "video" ? image.posterUrl : image?.url;
   return {
-    title: `${item.title} — Studio`,
+    title: `${item.title} | Studio`,
     description: item.summary,
     alternates: { canonical: `/studio/${item.slug}` },
     openGraph: {

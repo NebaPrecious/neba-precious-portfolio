@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 
 const nextConfig: NextConfig = {
+  // Hide the floating "N" developer badge that `next dev` shows in the corner.
+  devIndicators: false,
+
   // Component/data caching with `use cache` + tags; admin edits revalidate tags.
   cacheComponents: true,
 

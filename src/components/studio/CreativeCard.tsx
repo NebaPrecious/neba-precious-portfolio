@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Play } from "lucide-react";
 import Tilt from "@/components/animations/Tilt";
 import MediaImage from "@/components/media/MediaImage";
@@ -26,6 +26,28 @@ export default function CreativeCard({
   const cover = item.cover ?? (item.video?.posterUrl ? item.video : null);
   const duration = formatDuration(item.video?.durationSeconds);
   const isMedia = Boolean(item.video || item.externalUrl);
+
+  // Touch screens have no hover: play muted while the card is mostly in view.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(hover: hover)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.preload = "auto";
+          video.play().then(() => video.classList.add("is-playing")).catch(() => {});
+        } else {
+          video.pause();
+          video.classList.remove("is-playing");
+        }
+      },
+      { threshold: 0.65 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   function play() {
     const video = videoRef.current;

@@ -26,7 +26,7 @@ export default function Capabilities({
           </Reveal>
           <Reveal delay={0.08}>
             <p className="lede">
-              The languages, frameworks and tools I work with today — across code and camera.
+              The languages, frameworks and tools I work with today, across code and camera.
             </p>
           </Reveal>
         </div>

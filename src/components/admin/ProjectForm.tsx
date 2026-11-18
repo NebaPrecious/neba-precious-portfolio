@@ -163,7 +163,7 @@ export default function ProjectForm({
             <div className="field">
               <label htmlFor="confidentialityNote">Confidentiality note (optional)</label>
               <textarea id="confidentialityNote" name="confidentialityNote" defaultValue={values.confidentialityNote} rows={3} maxLength={600} />
-              <p className="field-hint">For company-owned or private work — explains why only a preview is shown.</p>
+              <p className="field-hint">For company-owned or private work. Explains why only a preview is shown.</p>
             </div>
           </section>
 
@@ -177,8 +177,8 @@ export default function ProjectForm({
             <div className="field">
               <label htmlFor="status">Visibility</label>
               <select id="status" name="status" defaultValue={values.status}>
-                <option value="draft">Draft — hidden from the site</option>
-                <option value="published">Published — visible</option>
+                <option value="draft">Draft (hidden from the site)</option>
+                <option value="published">Published (visible)</option>
               </select>
             </div>
             <label className="checkbox">

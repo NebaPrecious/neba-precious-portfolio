@@ -114,12 +114,12 @@ export default async function HomePage() {
                   <p>
                     {profile.engineeringApproach && (
                       <>
-                        On the engineering side — <strong>{profile.devBrand}</strong> — {lowerFirst(profile.engineeringApproach)}{" "}
+                        On the engineering side, as <strong>{profile.devBrand}</strong>: {lowerFirst(profile.engineeringApproach)}{" "}
                       </>
                     )}
                     {profile.creativeApproach && (
                       <>
-                        Behind the camera — <strong>{profile.studioBrand}</strong> — {lowerFirst(profile.creativeApproach)}
+                        Behind the camera, as <strong>{profile.studioBrand}</strong>: {lowerFirst(profile.creativeApproach)}
                       </>
                     )}
                   </p>
@@ -149,6 +149,9 @@ export default async function HomePage() {
                 </li>
               ))}
             </ol>
+            <p className="swipe-hint" aria-hidden="true">
+              Swipe
+            </p>
             <div className="split-links">
               <Link className="link-arrow" href="/work">
                 View all development work <ArrowUpRight size={15} aria-hidden="true" />

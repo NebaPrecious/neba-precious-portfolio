@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Neba Precious — Software Engineer & Visual Creative";
+export const alt = "Neba Precious | Software Engineer & Visual Creative";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -32,7 +32,7 @@ export default function OpenGraphImage() {
             color: "#8892b0",
           }}
         >
-          <span>Portfolio — Software &amp; Studio</span>
+          <span>Portfolio · Software &amp; Studio</span>
           <span>Douala, Cameroon</span>
         </div>
 

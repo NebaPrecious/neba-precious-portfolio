@@ -107,10 +107,10 @@ export default async function OverviewPage() {
             </div>
             <ul className="checklist">
               <Check ok={data.checklist.hasCv}>
-                {data.checklist.hasCv ? "CV uploaded." : <>No CV yet — <Link className="link-arrow" href="/admin/cv">upload a PDF</Link>. Download buttons stay hidden until then.</>}
+                {data.checklist.hasCv ? "CV uploaded." : <>No CV yet: <Link className="link-arrow" href="/admin/cv">upload a PDF</Link>. Download buttons stay hidden until then.</>}
               </Check>
               <Check ok={data.checklist.hasStudioWork}>
-                {data.checklist.hasStudioWork ? "Studio work is published." : <>The studio shows an “in the edit” slate — <Link className="link-arrow" href="/admin/studio/new">add your first piece</Link>.</>}
+                {data.checklist.hasStudioWork ? "Studio work is published." : <>The studio shows an “in the edit” slate: <Link className="link-arrow" href="/admin/studio/new">add your first piece</Link>.</>}
               </Check>
               <Check ok={data.checklist.projectsWithoutLinks === 0}>
                 {data.checklist.projectsWithoutLinks === 0
@@ -133,16 +133,16 @@ export default async function OverviewPage() {
                 {services.media === "cloudinary"
                   ? "Cloudinary media storage configured."
                   : services.media === "local-dev"
-                    ? "Using local dev uploads — configure Cloudinary before deploying."
-                    : "Media storage not configured — uploads are disabled."}
+                    ? "Using local dev uploads. Configure Cloudinary before deploying."
+                    : "Media storage not configured; uploads are disabled."}
               </Check>
               <Check ok={services.email}>
                 {services.email
                   ? "Email notifications (Resend) configured."
-                  : "Email not configured — enquiries are saved to the inbox only."}
+                  : "Email not configured; enquiries are saved to the inbox only."}
               </Check>
               <Check ok={services.appSecret}>
-                {services.appSecret ? "APP_SECRET set." : "APP_SECRET missing — required in production."}
+                {services.appSecret ? "APP_SECRET set." : "APP_SECRET missing (required in production)."}
               </Check>
             </ul>
             <RefreshSiteButton />

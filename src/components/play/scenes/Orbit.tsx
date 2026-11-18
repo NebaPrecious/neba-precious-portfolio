@@ -9,6 +9,7 @@ import { useTexture } from "@react-three/drei";
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { tilt } from "../motion";
 import { usePalette, type Palette } from "../palette";
 import type { OrbitScene, SceneProps } from "../types";
 
@@ -127,23 +128,25 @@ function Ring({ cards, eventSource, palette }: { cards: Card[]; eventSource: Rea
   useFrame((_, delta) => {
     if (drag.current) return;
     // Ease back to a gentle idle drift.
-    velocity.current = THREE.MathUtils.damp(velocity.current, 0.18, 1.2, delta);
+    const idle = 0.18 + (tilt.enabled ? tilt.x * 1.4 : 0);
+    velocity.current = THREE.MathUtils.damp(velocity.current, idle, 1.2, delta);
     spin.current += velocity.current * delta;
   });
 
   // Repeat covers so the ring always looks full.
+  const minCards = wide ? 8 : 6;
   const ringCards = useMemo(() => {
     const out: Card[] = [];
-    while (out.length < Math.max(8, cards.length)) out.push(...cards);
-    return out.slice(0, Math.max(8, cards.length));
-  }, [cards]);
+    while (out.length < Math.max(minCards, cards.length)) out.push(...cards);
+    return out.slice(0, Math.max(minCards, wide ? cards.length : Math.min(cards.length, 8)));
+  }, [cards, minCards, wide]);
   const radius = Math.max(3.6, ringCards.length * 0.46);
 
   return (
     <group
-      position={[wide ? 4.4 : 0, wide ? 0.2 : 1.6, wide ? -1 : -3]}
+      position={[wide ? 4.4 : 0, wide ? 0.2 : 2.2, wide ? -1 : -2]}
       rotation={[0.1, 0, 0]}
-      scale={wide ? 0.82 : 0.7}
+      scale={wide ? 0.82 : 0.74}
     >
       {ringCards.map((card, i) => (
         <Frame

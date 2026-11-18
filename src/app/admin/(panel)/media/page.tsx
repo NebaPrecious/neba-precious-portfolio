@@ -14,7 +14,7 @@ export default async function AdminMediaPage() {
         <div>
           <h1>Media library</h1>
           <p>
-            Every uploaded image, video and document. Files still in use can’t be deleted — remove them from
+            Every uploaded image, video and document. Files still in use can’t be deleted; remove them from
             their project first. Add alt text so images are accessible.
           </p>
         </div>

@@ -85,7 +85,7 @@ async function main() {
       studioBrand: "Preelite Visual Creatives",
       titles: ["Software Engineer", "Visual Creative"],
       heroIntro:
-        "I build practical, user-focused digital products as Dev Pre_elite — and tell stories through video and visuals as Preelite Visual Creatives.",
+        "I build practical, user-focused digital products as Dev Pre_elite, and tell stories through video and visuals as Preelite Visual Creatives.",
       shortBio:
         "I am a full-stack developer who enjoys turning ideas into useful, user-focused digital products.",
       longBio: [
@@ -93,7 +93,7 @@ async function main() {
         "Alongside software development, I am growing as a designer and video editor. I create visual designs with Canva, study Photoshop, and edit event highlights and teasers with CapCut.",
       ].join("\n\n"),
       engineeringApproach:
-        "Practical, user-focused experiences across frontend and backend systems — built to be useful first.",
+        "Practical, user-focused experiences across frontend and backend systems, built to be useful first.",
       creativeApproach:
         "Event highlights, teasers and social content, edited with attention to pacing and the story the footage is trying to tell.",
       openTo: [],

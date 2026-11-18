@@ -16,7 +16,7 @@ export default async function AdminSkillsPage() {
         <div>
           <h1>Skills &amp; tools</h1>
           <p>
-            Grouped lists shown on the home and about pages. No proficiency percentages — add a short note like
+            Grouped lists shown on the home and about pages. No proficiency percentages; add a short note like
             “Learning” where it helps.
           </p>
         </div>

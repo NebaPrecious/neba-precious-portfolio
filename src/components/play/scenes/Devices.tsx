@@ -10,6 +10,7 @@ import { ContactShadows, Float, PresentationControls, RoundedBox, useTexture } f
 import { useRouter } from "next/navigation";
 import { Suspense, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { tilt } from "../motion";
 import { usePalette, type Palette } from "../palette";
 import type { DevicesScene, SceneProps } from "../types";
 
@@ -104,6 +105,15 @@ function Rig({ screens, palette }: { screens: Screen[]; palette: Palette }) {
   const { size } = useThree();
   const wide = size.width / size.height >= 1.3;
   const n = screens.length;
+  const tiltGroup = useRef<THREE.Group>(null);
+
+  // On phones, tilting turns the whole arrangement.
+  useFrame((_, delta) => {
+    const g = tiltGroup.current;
+    if (!g || !tilt.enabled) return;
+    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, tilt.x * 0.7, 4, delta);
+    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, tilt.y * 0.25, 4, delta);
+  });
 
   // An arc: centre device forward, the rest fanned back and angled inward.
   const layout = useMemo(
@@ -127,6 +137,7 @@ function Rig({ screens, palette }: { screens: Screen[]; palette: Palette }) {
         azimuth={[-0.9, 0.9]}
         speed={1.6}
       >
+        <group ref={tiltGroup}>
         {screens.map((screen, i) => (
           <Float key={screen.url + i} speed={1.2 + i * 0.15} rotationIntensity={0.25} floatIntensity={0.6}>
             <Device
@@ -138,6 +149,7 @@ function Rig({ screens, palette }: { screens: Screen[]; palette: Palette }) {
             />
           </Float>
         ))}
+        </group>
       </PresentationControls>
       <ContactShadows position={[0, -2.6, 0]} opacity={0.35} scale={18} blur={2.6} far={5} />
     </group>

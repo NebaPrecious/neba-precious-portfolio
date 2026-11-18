@@ -144,8 +144,8 @@ export default function CreativeForm({
               <p className="field-hint">
                 {embed
                   ? embed.provider === "external"
-                    ? `Detected ${embed.label} — visitors get a “Watch on ${embed.label}” button over your cover image.`
-                    : `Detected ${embed.provider === "youtube" ? "YouTube" : "Vimeo"} — it will play on the page (privacy-enhanced embed).`
+                    ? `Detected ${embed.label}: visitors get a “Watch on ${embed.label}” button over your cover image.`
+                    : `Detected ${embed.provider === "youtube" ? "YouTube" : "Vimeo"}: it will play on the page (privacy-enhanced embed).`
                   : "YouTube and Vimeo play inline. Other platforms open in a new tab."}
               </p>
               {err("externalUrl")}
@@ -169,8 +169,8 @@ export default function CreativeForm({
             <div className="field">
               <label htmlFor="status">Visibility</label>
               <select id="status" name="status" defaultValue={values.status}>
-                <option value="draft">Draft — hidden from the site</option>
-                <option value="published">Published — visible</option>
+                <option value="draft">Draft (hidden from the site)</option>
+                <option value="published">Published (visible)</option>
               </select>
             </div>
             <label className="checkbox">

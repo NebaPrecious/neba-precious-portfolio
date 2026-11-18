@@ -9,7 +9,7 @@ import "@/styles/work.css";
 export const metadata: Metadata = {
   title: "Development work",
   description:
-    "Software projects by Neba Precious (Dev Pre_elite) — web and mobile products across personal finance and digital healthcare.",
+    "Software projects by Neba Precious (Dev Pre_elite): web and mobile products across personal finance and digital healthcare.",
   alternates: { canonical: "/work" },
 };
 
@@ -42,7 +42,7 @@ export default async function WorkPage() {
         fallbackWord="CODE"
       >
         <div className="play-overlay wrap">
-          <p className="play-top mono">01 · Source — Engineering</p>
+          <p className="play-top mono">01 · Source · Engineering</p>
           <div className="play-copy">
             <p className="eyebrow play-eyebrow">Development work</p>
             <h1 id="hero-title" className="play-title">

@@ -12,7 +12,7 @@ export async function sendEnquiryNotification(enquiry: Enquiry): Promise<boolean
   const config = getMailConfig();
   if (!config) {
     if (process.env.NODE_ENV !== "production") {
-      console.info(`[mail] Email not configured — enquiry ${enquiry.id} saved to the admin inbox only.`);
+      console.info(`[mail] Email not configured; enquiry ${enquiry.id} saved to the admin inbox only.`);
     }
     return false;
   }
@@ -28,7 +28,7 @@ export async function sendEnquiryNotification(enquiry: Enquiry): Promise<boolean
     ``,
     enquiry.message,
     ``,
-    `—`,
+    `---`,
     `Reply directly to this email to respond. Manage it in /admin/inbox.`,
   ].join("\n");
 

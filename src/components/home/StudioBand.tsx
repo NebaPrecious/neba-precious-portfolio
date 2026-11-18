@@ -23,7 +23,7 @@ export default function StudioBand({
           <Reveal>
             <p className="eyebrow">
               <span className="status-dot" data-state="rec" aria-hidden="true" />
-              <span className="eyebrow-index">02</span> Reel — Studio
+              <span className="eyebrow-index">02</span> Reel · Studio
             </p>
             <h2 id="studio-band-title" className="studio-band-title">
               {brand}
@@ -31,7 +31,7 @@ export default function StudioBand({
           </Reveal>
           <Reveal delay={0.08} className="studio-band-aside">
             <p className="lede">
-              The studio side of my practice — editing, shooting and designing for screens of
+              The studio side of my practice: editing, shooting and designing for screens of
               every size.
             </p>
             <ul className="studio-band-cats mono" aria-label="Studio disciplines">
@@ -52,7 +52,13 @@ export default function StudioBand({
               </Reveal>
             ))}
           </div>
-        ) : (
+        ) : null}
+        {featured.length > 1 && (
+          <p className="swipe-hint" aria-hidden="true">
+            Swipe
+          </p>
+        )}
+        {featured.length === 0 && (
           <Reveal>
             <StudioSlate />
           </Reveal>

@@ -1,5 +1,6 @@
 import EasterEgg from "@/components/site/EasterEgg";
 import SiteFooter from "@/components/site/SiteFooter";
+import MobileDock from "@/components/site/MobileDock";
 import SiteHeader from "@/components/site/SiteHeader";
 import Spotlight from "@/components/site/Spotlight";
 import PersonStructuredData from "@/components/seo/PersonStructuredData";
@@ -16,11 +17,12 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
       <span id="top" />
       <Spotlight />
       <EasterEgg />
-      <SiteHeader name={profile.displayName} email={profile.email} socials={profile.socials} />
+      <SiteHeader name={profile.displayName} />
       <main id="main" tabIndex={-1}>
         {children}
       </main>
       <SiteFooter profile={profile} />
+      <MobileDock />
       <PersonStructuredData profile={profile} />
     </>
   );

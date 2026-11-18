@@ -20,9 +20,6 @@ git push -u origin redesign
 Open a pull request into `main` on GitHub and merge it, or deploy the `redesign`
 branch directly in step 5.
 
-Optional: `public/samples/` (about 10 MB of placeholder media) is only used by
-`npm run samples:add`. Delete it before committing if you won't use the samples
-again.
 
 ## 2. Database: Neon (about 5 minutes)
 

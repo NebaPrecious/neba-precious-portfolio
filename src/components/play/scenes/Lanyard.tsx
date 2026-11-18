@@ -12,12 +12,14 @@ import {
   Physics,
   RigidBody,
   useRopeJoint,
+  useRapier,
   useSphericalJoint,
   type RapierRigidBody,
 } from "@react-three/rapier";
 import { RoundedBox } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { setGravity, tilt } from "../motion";
 import { usePalette, type Palette } from "../palette";
 import type { LanyardScene, SceneProps } from "../types";
 
@@ -147,7 +149,13 @@ function Band({ scene, palette }: { scene: LanyardScene; palette: Palette }) {
     };
   }, [hovered, dragged]);
 
+  const { world } = useRapier();
+
   useFrame((state) => {
+    if (tilt.enabled) {
+      setGravity(world, tilt.x * 30, -40, tilt.y * 10);
+      card.current?.wakeUp();
+    }
     if (dragged && card.current) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
@@ -186,7 +194,7 @@ function Band({ scene, palette }: { scene: LanyardScene; palette: Palette }) {
 
   return (
     <>
-      <group position={[wide ? 3.2 : 0, wide ? 4.2 : 5.1, 0]}>
+      <group position={[wide ? 3.2 : 0, wide ? 4.2 : 5.6, 0]}>
         <RigidBody ref={fixed} {...segment} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segment}>
           <BallCollider args={[0.1]} />
