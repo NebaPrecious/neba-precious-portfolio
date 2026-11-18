@@ -1,0 +1,584 @@
+/* ==========================================================================
+   Mobile — most visitors are on phones, so they get their own treatment:
+   floating dock, hide-on-scroll header, swipe carousels, edge-to-edge media,
+   safe-area aware spacing. Breakpoint matches the desktop nav (860px).
+   ========================================================================== */
+
+/* ---- Floating dock ---------------------------------------------------------- */
+
+.mobile-dock {
+  display: none;
+}
+
+@media (max-width: 859px) {
+  :root {
+    --dock-space: calc(5.6rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  :root body {
+    padding-bottom: var(--dock-space);
+  }
+
+  :root .mobile-dock {
+    position: fixed;
+    left: 50%;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    z-index: 70;
+    display: block;
+    width: min(calc(100% - 1.5rem), 26rem);
+    transform: translateX(-50%);
+    border: 1px solid var(--line-strong);
+    border-radius: 1.4rem;
+    background: color-mix(in oklch, var(--bg) 72%, transparent);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    box-shadow:
+      0 1px 0 color-mix(in oklch, var(--text) 10%, transparent) inset,
+      0 18px 40px -16px oklch(0 0 0 / 0.65);
+    transition: transform 380ms var(--ease-out), opacity 240ms ease;
+  }
+
+  :root .mobile-dock[data-hidden="true"] {
+    transform: translate(-50%, 140%);
+    opacity: 0;
+  }
+
+  :root .mobile-dock ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    list-style: none;
+    padding: 0.35rem;
+  }
+
+  :root .mobile-dock a {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.15rem;
+    padding: 0.5rem 0 0.4rem;
+    border-radius: 1.05rem;
+    color: var(--text-3);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    -webkit-tap-highlight-color: transparent;
+    transition: color var(--dur-2) ease, transform 160ms ease;
+  }
+
+  :root .mobile-dock a:active {
+    transform: scale(0.92);
+  }
+
+  :root .mobile-dock a[aria-current="page"] {
+    color: var(--accent-text);
+  }
+
+  :root .mobile-dock a > svg,
+  :root .mobile-dock a > span:not(.mobile-dock-pill) {
+    position: relative;
+    z-index: 1;
+  }
+
+  :root .mobile-dock-pill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--accent-soft);
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--accent) 35%, transparent);
+  }
+
+  /* ---- Header: slim, hides on scroll down -------------------------------- */
+
+  :root .site-header {
+    transition: transform 380ms var(--ease-out), border-color var(--dur-2) ease, background-color var(--dur-2) ease;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in oklch, var(--bg) 80%, transparent);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  :root .site-header[data-hidden="true"] {
+    transform: translateY(-110%);
+  }
+
+  :root .site-header .header-actions {
+    margin-left: auto;
+  }
+
+  /* Sticky things below the header move up when it hides. */
+  :root .site-header[data-hidden="true"] ~ main .split-heading,
+  :root .site-header[data-hidden="true"] ~ main .studio-toolbar {
+    top: 0;
+  }
+
+  :root .split-heading,
+  :root .studio-toolbar {
+    transition: top 380ms var(--ease-out);
+  }
+
+  /* ---- Play heroes ---------------------------------------------------------- */
+
+  :root .play-hero[data-variant="full"] {
+    height: calc(100svh - var(--header-height));
+    min-height: 36rem;
+  }
+
+  :root .play-hero[data-variant="page"] {
+    height: min(92svh, 46rem);
+    min-height: 34rem;
+  }
+
+  :root .play-overlay {
+    padding-bottom: var(--space-6);
+  }
+
+  :root .play-hint {
+    bottom: var(--space-3);
+    justify-content: flex-start;
+  }
+
+  :root .play-hint .mono {
+    display: inline-flex !important;
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+  }
+
+  :root .play-hero[data-variant="page"] .play-hint {
+    display: flex !important;
+  }
+
+  :root .play-hint .play-toss {
+    margin-left: auto;
+  }
+
+  /* Hint sits under the CTAs on the full hero. */
+  :root .play-hero[data-variant="full"] .play-overlay {
+    padding-bottom: calc(var(--space-6) + 2.25rem);
+  }
+
+  :root .play-tilt {
+    border-color: var(--accent) !important;
+    color: var(--accent-text) !important;
+    animation: tilt-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes tilt-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+/* ---- Phones -------------------------------------------------------------- */
+
+@media (max-width: 700px) {
+  :root {
+    --gutter: 1.15rem;
+  }
+
+  :root .section {
+    padding-block: var(--space-8);
+  }
+
+  /* Hero copy: confident but compact. */
+  :root .play-title {
+    font-size: clamp(2.5rem, 11.5vw, 3.4rem) !important;
+  }
+
+  :root .play-intro {
+    font-size: 1.02rem;
+  }
+
+  :root .play-ctas {
+    gap: 0.6rem;
+  }
+
+  :root .play-ctas .btn {
+    flex: 1 1 auto;
+  }
+
+  /* Split section: the hero already introduced you — keep just the socials. */
+  :root .split {
+    padding-block: var(--space-7);
+    gap: var(--space-5);
+  }
+
+  :root .split-aside > div:first-child {
+    display: none;
+  }
+
+  :root .split-aside .social-icons {
+    margin-top: 0;
+  }
+
+  :root .split-section + .split-section {
+    margin-top: var(--space-8);
+  }
+
+  /* ---- Swipe carousels ---------------------------------------------------- */
+
+  :root .hover-list,
+  :root .studio-band .creative-grid {
+    display: flex !important;
+    columns: auto !important;
+    gap: 0.9rem;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 0.25rem var(--gutter) 1rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  :root .hover-list::-webkit-scrollbar,
+  :root .studio-band .creative-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  :root .hover-list > li {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  :root .studio-band .creative-grid > * {
+    flex: 0 0 76%;
+    margin-bottom: 0 !important;
+    scroll-snap-align: start;
+  }
+
+  /* Project card becomes a tall, image-led card. */
+  :root .pcard {
+    height: 100%;
+    margin-inline: 0;
+    padding: 0;
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: color-mix(in oklch, var(--surface) 70%, transparent);
+    grid-template-columns: 1fr !important;
+    align-content: start;
+  }
+
+  :root .pcard-side {
+    order: 0;
+    position: relative;
+  }
+
+  :root .pcard-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3.4;
+    border: 0;
+    border-radius: 0;
+  }
+
+  :root .pcard-stage {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--bg) 75%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--text);
+  }
+
+  :root .pcard-body {
+    padding: 1rem 1.1rem 1.25rem;
+  }
+
+  :root .pcard-summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  :root .swipe-hint {
+    display: inline-flex !important;
+  }
+
+  /* ---- Chips: one swipeable row ------------------------------------------- */
+
+  :root .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, transparent, black var(--gutter), black calc(100% - 2rem), transparent);
+  }
+
+  :root .chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  :root .chip {
+    flex: none;
+  }
+
+  :root .studio-toolbar,
+  :root .work-toolbar {
+    flex-wrap: nowrap;
+  }
+
+  :root .work-count {
+    display: none;
+  }
+
+  /* ---- Studio page: two-column masonry with compact captions -------------- */
+
+  :root .studio-page .creative-grid {
+    columns: 2 !important;
+    column-gap: 0.75rem;
+  }
+
+  :root .studio-page .creative-grid > * {
+    margin-bottom: 1.4rem !important;
+  }
+
+  :root .studio-page .creative-card-title {
+    font-size: 1rem;
+  }
+
+  :root .studio-page .creative-card-summary {
+    display: none;
+  }
+
+  :root .studio-page .creative-card-meta {
+    flex-wrap: wrap;
+    gap: 0.2rem 0.6rem;
+    font-size: 0.6rem;
+  }
+
+  :root .creative-card-play {
+    width: 2.1rem;
+    height: 2.1rem;
+    left: 0.6rem;
+    bottom: 0.6rem;
+  }
+
+  :root .creative-card-media {
+    border-radius: 0.9rem;
+  }
+
+  /* ---- Project plates & detail -------------------------------------------- */
+
+  :root .project-plates {
+    gap: var(--space-8);
+  }
+
+  :root .plate {
+    border-radius: 1.1rem;
+    margin-inline: calc(var(--gutter) * -0.5);
+  }
+
+  :root .project-plate-title {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  :root .detail-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  :root .detail-meta > div[style] {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Screenshot gallery becomes a swipe row. */
+  :root .gallery:not(.gallery-wide) {
+    display: flex;
+    gap: 0.75rem;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  :root .gallery:not(.gallery-wide) > * {
+    flex: 0 0 62%;
+    scroll-snap-align: center;
+  }
+
+  :root .viewer-stage[data-aspect="landscape"] {
+    margin-inline: calc(var(--gutter) * -1);
+    border-radius: 0;
+  }
+
+  :root .viewer-head h1 {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+  }
+
+  /* ---- Footer ---------------------------------------------------------------- */
+
+  :root .footer-cta h2 {
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+  }
+
+  :root .footer-email {
+    font-size: 1.15rem;
+  }
+
+  :root .footer-cta-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  :root .footer-grid {
+    gap: var(--space-5) var(--space-4);
+  }
+
+  /* ---- Forms: comfortable tap targets, no iOS zoom ------------------------ */
+
+  :root .field input:not([type="checkbox"]):not([type="radio"]),
+  :root .field textarea,
+  :root .field select {
+    font-size: 16px !important;
+  }
+
+  :root .form-actions .btn {
+    width: 100%;
+  }
+
+  :root .radio-chip span {
+    min-height: 2.75rem;
+  }
+}
+
+.swipe-hint {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--text-3);
+}
+
+.swipe-hint::after {
+  content: "→";
+  animation: swipe-nudge 1.8s ease-in-out infinite;
+}
+
+@keyframes swipe-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+/* ---- Touch devices: no hover, so give pressed feedback instead ------------- */
+
+@media (hover: none) {
+  :root .pcard:active,
+  :root .creative-card:active {
+    transform: scale(0.98);
+    transition: transform 140ms ease;
+  }
+
+  :root .btn:active {
+    transform: scale(0.97);
+  }
+
+  :root .tilt {
+    transform: none !important;
+  }
+}
+
+/* ---- Fixes found on device-size review ----------------------------------- */
+
+/* Grid children must be allowed to shrink, or carousels widen the column. */
+.split > *,
+.split-main,
+.split-aside {
+  min-width: 0;
+}
+
+@media (max-width: 859px) {
+  :root .play-hero[data-variant="page"] .play-overlay {
+    padding-bottom: calc(var(--space-6) + 2.25rem);
+  }
+
+  :root .play-hint .mono {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  :root .play-hint .play-toss {
+    flex: none;
+    min-height: 2rem;
+    padding: 0.25rem 0.7rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Show whole screenshots on a soft plate instead of a cropped zoom. */
+  :root .pcard-thumb {
+    background:
+      radial-gradient(80% 60% at 50% 20%, var(--accent-soft), transparent 70%),
+      var(--surface);
+  }
+
+  :root .pcard-thumb img {
+    object-fit: contain !important;
+    padding: 1.1rem 1rem 0.6rem;
+    filter: drop-shadow(0 14px 24px oklch(0 0 0 / 0.45));
+  }
+}
+
+/* Heroes run under the floating dock, but their content sits above it. */
+@media (max-width: 859px) {
+  :root .play-hero .play-overlay,
+  :root .play-hero[data-variant="full"] .play-overlay,
+  :root .play-hero[data-variant="page"] .play-overlay {
+    padding-bottom: calc(var(--dock-space) + var(--space-4));
+  }
+
+  :root .play-hint {
+    bottom: calc(var(--dock-space) - 0.35rem);
+  }
+
+  :root .play-hero[data-variant="full"] {
+    height: 100svh;
+    min-height: 40rem;
+    margin-top: calc(var(--header-height) * -1);
+    padding-top: var(--header-height);
+  }
+
+  :root .play-hero[data-variant="full"] .play-overlay {
+    padding-top: calc(var(--header-height) + var(--space-4));
+  }
+}
+
+/* Calmer phone heroes: title, one line of context, actions. */
+@media (max-width: 700px) {
+  :root .play-eyebrow {
+    display: none;
+  }
+
+  :root .play-title {
+    margin-top: 0;
+  }
+
+  /* Studio hero: REC + timecode, the title and the orbit; the rest is below. */
+  :root .play-hero .studio-hero-top > span:nth-child(2),
+  :root .play-hero .studio-band-cats,
+  :root .play-hero.screen .play-intro {
+    display: none;
+  }
+
+  :root .play-hero .studio-hero-top {
+    justify-content: space-between;
+  }
+}

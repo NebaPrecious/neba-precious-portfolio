@@ -1,0 +1,426 @@
+/* ==========================================================================
+   Home — Play hero (interactive 3D), sticky split layout, cards, toolkit
+   ========================================================================== */
+
+/* ---- Split layout (sticky identity column) ------------------------------- */
+
+.split {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-9);
+}
+
+@media (min-width: 1024px) {
+  .split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-7);
+  }
+
+  .split-aside {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    align-self: start;
+    height: calc(100svh - var(--header-height) - var(--space-6) * 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: var(--space-4);
+  }
+}
+
+.split-name {
+  font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+.split-title {
+  margin-top: var(--space-3);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.split-tagline {
+  margin-top: var(--space-4);
+  max-width: 22rem;
+  color: var(--text-2);
+}
+
+/* Nav with growing indicator lines */
+.spy-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .spy-nav {
+    display: block;
+  }
+}
+
+.spy-nav ul {
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.spy-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  transition: color var(--dur-2) ease;
+}
+
+.spy-line {
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--dur-2) var(--ease-out), background-color var(--dur-2) ease;
+}
+
+.spy-nav a:hover,
+.spy-nav a:focus-visible,
+.spy-nav a[data-active="true"] {
+  color: var(--text);
+}
+
+.spy-nav a:hover .spy-line,
+.spy-nav a:focus-visible .spy-line,
+.spy-nav a[data-active="true"] .spy-line {
+  width: 4rem;
+}
+
+.spy-nav a[data-active="true"] .spy-line {
+  background: var(--accent);
+}
+
+.social-icons {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: var(--space-6);
+}
+
+.social-icons a {
+  display: grid;
+  place-items: center;
+  color: var(--text-3);
+  transition: color var(--dur-1) ease, transform var(--dur-2) var(--ease-out);
+}
+
+.social-icons a:hover {
+  color: var(--accent-text);
+  transform: translateY(-3px);
+}
+
+/* Right column */
+.split-section + .split-section {
+  margin-top: var(--space-9);
+}
+
+.split-heading {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* Mobile/tablet: the section label sticks while you scroll the section. */
+@media (max-width: 1023px) {
+  .split-heading {
+    position: sticky;
+    top: var(--header-height);
+    z-index: 5;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 0.9rem var(--gutter);
+    background: color-mix(in oklch, var(--bg) 82%, transparent);
+    backdrop-filter: blur(8px);
+    margin-bottom: var(--space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .split-heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+}
+
+.split-prose {
+  display: grid;
+  gap: 1.1em;
+  color: var(--text-2);
+  font-size: var(--step-0);
+  line-height: 1.7;
+}
+
+.split-prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.split-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: var(--space-6);
+  color: var(--text);
+}
+
+/* ---- Hover list: highlight one, dim the rest ------------------------------ */
+
+.hover-list {
+  list-style: none;
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (hover: hover) and (min-width: 1024px) {
+  .hover-list:hover > li {
+    opacity: 0.5;
+  }
+
+  .hover-list > li {
+    transition: opacity var(--dur-2) ease;
+  }
+
+  .hover-list > li:hover,
+  .hover-list > li:focus-within {
+    opacity: 1;
+  }
+}
+
+/* ---- Project card ------------------------------------------------------------ */
+
+.pcard {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  margin-inline: calc(var(--space-5) * -1);
+  border-radius: var(--radius-lg);
+  transition: background-color var(--dur-2) ease, box-shadow var(--dur-2) ease;
+}
+
+@media (min-width: 640px) {
+  .pcard {
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+@media (hover: hover) {
+  .pcard:hover {
+    background: color-mix(in oklch, var(--surface) 70%, transparent);
+    box-shadow: inset 0 1px 0 color-mix(in oklch, var(--text) 8%, transparent), 0 20px 40px -30px oklch(0 0 0 / 0.6);
+  }
+}
+
+.pcard:focus-within {
+  background: color-mix(in oklch, var(--surface) 70%, transparent);
+}
+
+.pcard-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  order: 2;
+}
+
+@media (min-width: 640px) {
+  .pcard-side {
+    order: 0;
+  }
+}
+
+.pcard-thumb {
+  position: relative;
+  width: 9rem;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color var(--dur-2) ease;
+}
+
+.pcard-thumb img {
+  object-position: top;
+}
+
+.pcard:hover .pcard-thumb {
+  border-color: color-mix(in oklch, var(--accent) 50%, transparent);
+}
+
+.pcard-stage {
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.pcard-title {
+  font-size: var(--step-1);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.pcard-title a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  transition: color var(--dur-1) ease;
+}
+
+.pcard:hover .pcard-title a,
+.pcard-title a:focus-visible {
+  color: var(--accent-text);
+}
+
+.pcard-arrow {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.pcard:hover .pcard-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Make the whole card clickable via the title link. */
+.stretched::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.pcard-cat {
+  margin-top: 0.2rem;
+  font-size: var(--step--1);
+  color: var(--text-3);
+}
+
+.pcard-summary {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+.pcard-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+  font-size: var(--step--2);
+  color: var(--text-3);
+}
+
+.pill-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: var(--space-4);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: var(--step--2);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.pill-note {
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* ---- Toolkit --------------------------------------------------------------- */
+
+.toolkit {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.toolkit-group h3 {
+  font-size: var(--step-0);
+  font-weight: 650;
+  color: var(--text);
+}
+
+.toolkit-group .pill-list {
+  margin-top: var(--space-3);
+}
+
+/* ---- Section foot -------------------------------------------------------- */
+
+.section-foot {
+  margin-top: var(--space-8);
+}
+
+/* ---- Capabilities -------------------------------------------------------- */
+
+.capabilities {
+  display: grid;
+  gap: var(--space-6) var(--gutter);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.capability {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line-strong);
+}
+
+.capability h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: var(--step-1);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+.capability h3 .mono {
+  font-size: var(--step--2);
+  font-weight: 400;
+}
+
+.capability ul {
+  list-style: none;
+  margin-top: var(--space-4);
+  display: grid;
+  gap: 0.3rem;
+}
+
+.capability li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-2);
+}
+
+.capability .tag {
+  padding: 0.05rem 0.45rem;
+}

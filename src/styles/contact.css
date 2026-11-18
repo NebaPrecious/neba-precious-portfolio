@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Contact page
+   ========================================================================== */
+
+.page-hero h1.contact-title {
+  font-stretch: var(--wdth-wide);
+  font-size: min(var(--step-6), 12cqi);
+}
+
+.contact-grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 960px) {
+  .contact-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  }
+}
+
+.contact-details {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.contact-details > div {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line-strong);
+}
+
+.contact-details dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.contact-details dd {
+  margin-top: 0.4rem;
+  overflow-wrap: anywhere;
+}
+
+.contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .contact-aside {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    align-self: start;
+  }
+}

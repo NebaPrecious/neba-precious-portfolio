@@ -1,0 +1,269 @@
+/* ==========================================================================
+   Play hero — interactive 3D toy box used on the landing and page heroes
+   ========================================================================== */
+
+/* ---- Play hero ----------------------------------------------------------- */
+
+.play-hero {
+  position: relative;
+  isolation: isolate;
+  height: calc(100svh - var(--header-height));
+  min-height: 34rem;
+  max-height: 64rem;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: default;
+  background:
+    radial-gradient(90% 70% at 50% 30%, var(--accent-soft), transparent 70%),
+    var(--bg);
+}
+
+.play-hero[data-variant="page"] {
+  height: min(78svh, 46rem);
+  min-height: 30rem;
+}
+
+.play-hero[data-playing="true"] {
+  cursor: grab;
+}
+
+.play-hero[data-playing="true"]:active {
+  cursor: grabbing;
+}
+
+.play-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  animation: fade-in 900ms var(--ease-out) 150ms forwards;
+}
+
+.play-canvas canvas {
+  touch-action: pan-y;
+}
+
+/* Static composition shown before / instead of the 3D scene. */
+.play-fallback {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 62%;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.4rem, 1.5vw, 1rem);
+  transition: opacity var(--dur-3) ease;
+}
+
+.play-hero[data-playing="true"] .play-fallback {
+  opacity: 0;
+}
+
+.play-fallback span {
+  display: grid;
+  place-items: center;
+  width: clamp(3.4rem, 11vw, 8.5rem);
+  aspect-ratio: 1;
+  border: 3px solid var(--accent);
+  border-radius: clamp(0.6rem, 1.6vw, 1.2rem);
+  background: var(--surface-2);
+  color: var(--accent);
+  font-size: clamp(2rem, 7vw, 5.6rem);
+  font-weight: 850;
+  box-shadow: var(--shadow);
+  transform: rotate(calc((var(--i) - 1.5) * 4deg)) translateY(calc(var(--i) * 6px - 8px));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .play-fallback span {
+    animation: drop-in 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(var(--i) * 110ms);
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    translate: 0 -60vh;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Copy layered over the scene; only real controls take pointer events. */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: var(--space-5) var(--space-8);
+  pointer-events: none;
+}
+
+.play-overlay a,
+.play-overlay button {
+  pointer-events: auto;
+}
+
+.play-overlay::after {
+  /* Scrim so the copy stays readable over moving objects. */
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 55%;
+  z-index: -1;
+  background: linear-gradient(to top, var(--bg) 18%, color-mix(in oklch, var(--bg) 65%, transparent) 55%, transparent);
+  pointer-events: none;
+}
+
+.play-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.play-copy {
+  max-width: 44rem;
+}
+
+.play-eyebrow {
+  color: var(--accent-text);
+}
+
+.play-title {
+  margin-top: var(--space-3);
+  font-size: clamp(2.4rem, 1.4rem + 4.6vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.play-intro {
+  margin-top: var(--space-4);
+  max-width: 40rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.play-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: var(--space-6);
+}
+
+.play-hint {
+  position: absolute;
+  inset: auto 0 var(--space-4);
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: none;
+  font-size: var(--step--2);
+  color: var(--text-3);
+}
+
+.play-hint .mono {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.play-toss {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--bg) 70%, transparent);
+  color: var(--text-2);
+  font: inherit;
+  font-size: var(--step--2);
+  cursor: pointer;
+  transition: all var(--dur-1) ease;
+}
+
+.play-toss:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+@media (max-width: 700px) {
+  .play-hint .mono {
+    display: none;
+  }
+
+  .play-overlay {
+    padding-bottom: var(--space-7);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .play-copy > *,
+  .play-top {
+    animation: rise-in 900ms var(--ease-out) both;
+  }
+
+  .play-copy > :nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .play-copy > :nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  .play-copy > :nth-child(4) {
+    animation-delay: 240ms;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* Page hero variant: the toys sit on the right, copy on the left. */
+.play-hero .play-copy h1.play-title {
+  overflow-wrap: break-word;
+}
+
+.play-hero.screen {
+  background:
+    radial-gradient(80% 70% at 70% 30%, oklch(0.9 0.135 172 / 0.08), transparent 70%),
+    var(--bg);
+}
+
+/* Phones: tapping already bounces things; keep inner-page heroes uncluttered. */
+@media (max-width: 700px) {
+  .play-hero[data-variant="page"] .play-hint {
+    display: none;
+  }
+}

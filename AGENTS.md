@@ -6,29 +6,66 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Neba Precious Portfolio
 
-Single-page Next.js 16 App Router portfolio. See `LOCAL_DEVELOPMENT.md` for the verified local toolchain (Node 24, npm, Next 16.3.4).
+Full-stack Next.js 16 App Router site: a public portfolio plus a private admin
+dashboard. See `README.md` for setup, and `docs/redesign/` for the design direction
+and decisions.
 
 ## Commands
 
-- `npm run dev` — dev server on http://localhost:3000 (Turbopack default)
-- `npm run check` — full gate: `lint` -> `typecheck` -> `build`. Run before committing.
-- `npm run build && npm run start` — production preview
-- Individual: `npm run lint`, `npm run typecheck`
-
-Use npm (repo has `package-lock.json`).
+- `npm run dev`: dev server on **http://localhost:3005**
+- `npm run check`: lint → typecheck → build. Run before committing. The build reads
+  the database, so `DATABASE_URL` must be reachable.
+- `npm run db:generate` / `db:migrate` / `db:seed` / `admin:create`
+- Use npm (there is a `package-lock.json`) and Node 24 (`nvm use 24`).
 
 ## Architecture
 
-- **Dual desktop/mobile render tree**: `src/app/page.tsx` renders BOTH a `.desktop-portfolio` and `.mobile-portfolio` wrapper, each with its own set of components (`src/components/sections/*` vs `src/components/mobile/*`). CSS toggles visibility — `.mobile-portfolio` is shown only at `max-width: 700px`; desktop is hidden then. When changing one section, likely update BOTH variants.
-- **Styling is hand-written plain CSS** in `src/app/globals.css` (~2500 lines) using CSS custom properties (e.g. `--accent`, `--surface`). Tailwind 4 is installed but the design system is custom CSS — don't assume `@apply` or Tailwind utilities are used.
-- Design tokens (colors, fonts, `--container`) and page metadata/SEO live in `src/app/globals.css` and `src/app/layout.tsx` respectively.
-- `@/*` path alias maps to `src/*` (see `tsconfig.json`).
-- Project content is data-driven from `src/data/projects.ts`.
-- Client animation wrapper: `src/components/animations/Reveal.tsx` (`"use client"`, uses `motion`).
+- **Cache Components are on** (`cacheComponents: true`).
+  - Public reads live in `src/server/dal/public.ts` as `'use cache'` functions with
+    `cacheTag`. Admin server actions call `updateTag(TAGS.x)`.
+  - Anything that reads cookies, headers or searchParams must be inside Suspense.
+  - Admin pages and layouts export `instant = false`.
+- **Single responsive render tree.** The old dual desktop/mobile trees were removed;
+  don't reintroduce them.
+- **Styling is hand-written CSS** in `src/styles/*`: tokens, base, components, plus
+  per-area files imported by the pages that use them.
+  - Tailwind is imported for preflight only. Don't use utility classes.
+  - Theme is set with `data-theme` on `<html>`, applied before paint by the inline
+    script in `src/app/layout.tsx` and stored in the `theme` cookie.
+  - `.screen` forces the dark "screening room" palette (used by the Studio).
+- **Mobile first-class:** `src/styles/mobile.css` (loaded globally). Below 860px
+  the site uses `MobileDock` for navigation and a header that hides on scroll.
+  Selectors there are prefixed with `:root` so they beat page stylesheets, which
+  load later. Phone tilt and shake feed the 3D scenes through
+  `src/components/play/motion.ts`.
+- **Server code** lives in `src/server/`:
+  - `db/` holds the schema and client. `client.ts` has no `server-only` so CLI
+    scripts can use it.
+  - `dal/` holds data access, `actions/` holds server actions, and `auth/` holds
+    sessions and passwords.
+  - `media.ts` handles Cloudinary and local dev uploads, `mail.ts` sends through
+    Resend, and `env.ts` holds optional service config.
+- **Auth:** call `requireAdmin()` at the top of every admin page, action, DAL
+  function and route handler. `src/proxy.ts` is only an optimistic cookie check.
+- **3D heroes:** `src/components/play/`. `PlayHero` gates and lazy-loads one
+  scene per page, chosen by `SceneSpec.type` (`types.ts`):
+  - `toybox` (`Playground.tsx`)
+  - `devices`, `orbit` and `lanyard` (`scenes/*`) Colours come from CSS tokens through
+  `readPalette()`; don't hard-code them. Keep the static `.play-fallback` working
+  for reduced-motion and no-WebGL visitors.
+- **Content authenticity:** never seed or insert placeholder or stock media as
+  Neba's work. The studio shows an honest "in the edit" slate until real work is
+  published.
+- `@/*` maps to `src/*`.
 
 ## Gotchas
 
-- `src/app/page.tsx` contains leftover dead snippet inside the JSX (a stray `return (...)` block from an earlier edit). Don't duplicate or reintroduce it.
-- `globals.css` breakpoints: mobile `max-width: 700px`, tablet `701–900px`. Some rules are duplicated/conflicting inside the media queries (e.g. `.mobile-portrait-area` defined twice in `@media (max-width: 350px)`); the later one wins — be careful editing these.
-- SEO/content metadata is centralized in `layout.tsx` (`metadata`, `viewport`); also generated files `robots.ts`, `sitemap.ts`, `icon.tsx`, `opengraph-image.tsx`, `PersonStructuredData.tsx`.
-- Site URL base uses `NEXT_PUBLIC_SITE_URL` with a Vercel fallback.
+- React 19 resets `<form action>` fields after an action. Admin forms use
+  `useFormAction` (onSubmit + transition) from `src/components/admin/ui.tsx` so
+  input survives validation errors.
+- Drizzle renders bare column names inside raw `sql` subqueries. Qualify them
+  explicitly (see `listMediaWithUsage`).
+- Local uploads (`public/uploads/dev`) work only in development. Production needs
+  Cloudinary.
+- The `/cv` route is dynamic on purpose (`connection()`), so a newly published CV
+  is served immediately.

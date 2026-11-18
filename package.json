@@ -8,24 +8,41 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "check": "npm run lint && npm run typecheck && npm run build",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx --env-file-if-exists=.env.local scripts/seed.ts",
+    "admin:create": "tsx --env-file-if-exists=.env.local scripts/create-admin.ts",
+    "db:start:local": "/usr/lib/postgresql/16/bin/pg_ctl -D $HOME/.local/share/neba-portfolio-pg -o '-p 54329 -k /tmp -c listen_addresses=localhost' -l $HOME/.local/share/neba-portfolio-pg/server.log start"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "@react-three/rapier": "^2.2.0",
+    "drizzle-orm": "^0.45.4",
     "lucide-react": "^1.26.0",
     "motion": "^12.42.2",
-    "next": "^16.3.4",
+    "next": "^16.4.6",
+    "postgres": "^4.1.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-icons": "^5.7.0"
+    "react-icons": "^5.7.0",
+    "server-only": "^0.0.1",
+    "three": "^0.187.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.187.0",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^9",
-    "eslint-config-next": "^16.3.4",
+    "eslint-config-next": "^16.4.6",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
